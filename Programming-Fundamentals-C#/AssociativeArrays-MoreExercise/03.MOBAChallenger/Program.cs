@@ -8,7 +8,7 @@ namespace MOBAChallenger
     {
         static void Main(string[] args)
         {
-            var palyerPoll = new SortedDictionary<string, Dictionary<string, int>>(); // пазим сортиран играч, позиция и скил
+            var palyerPoll = new SortedDictionary<string, Dictionary<string, int>>();
  
             while (true)
             {
