@@ -10,28 +10,43 @@ namespace _07.StoreBoxes
 		{
 			List<Box> listOfBoxes = new List<Box>();
 
-			while (true)
+			string input;
+
+			while ((input = Console.ReadLine()) != "end")
 			{
-				string[] input = Console.ReadLine()// {Serial Number} {Item Name} {Item Quantity} {itemPrice}
+				string[] command = input
 					.Split(" ", StringSplitOptions.RemoveEmptyEntries)
 					.ToArray();
 
-				string serialNumber = input[0];
-				string itemName = input[1];
-				int itemQuantlity = int.Parse(input[2]);
-				double itemPrice = double.Parse(input[3]);
+				string serialNumber = command[0];
+				string itemName = command[1];
+				int itemQuantlity = int.Parse(command[2]);
+				double itemPrice = double.Parse(command[3]);
 
-				BoxId(serialNumber, itemName);
-				BoxPrice(itemQuantlity, itemPrice);
-			}  
+				
 
-		}
+				Box box = new Box
+				{
+					SerialNumber = serialNumber,
+					Item = itemName,
+					ItemQuantlity = itemQuantlity,
+				    PriceForABox = itemPrice,
+					TotallPrice = BoxPrice(itemQuantlity, itemPrice),
 
-        private static string BoxId(string serialNumber, string itemName)
-        {
-            return (serialNumber, itemName);
+				};
 
-		}
+				listOfBoxes.Add(box);
+			}
+
+            foreach (var item in listOfBoxes.OrderByDescending(p => p.TotallPrice))
+            {
+                Console.WriteLine($"{item.SerialNumber}");
+                Console.WriteLine($"-- {item.Item} - ${item.PriceForABox:f2}: {item.ItemQuantlity}");
+                Console.WriteLine($"-- ${item.TotallPrice:f2}");
+            }
+
+
+		}        
 
         private static double BoxPrice( int itemQuantlity, double itemPrice)
         {
@@ -40,26 +55,17 @@ namespace _07.StoreBoxes
 			return boxPrice;
 
 		}
-    }
-	class Item // Name and Price.
-	{
-		public string Name { get; set; }
-
-		public double Price { get; set; }
-	}
+    }	
 	class Box // Serial Number, Item, Item Quantity and Price for a Box
-	{
-
-		//public Box()
-	    //   {
-		//	Item = new Item();
-       //      }
+	{		
 		public string SerialNumber { get; set; }
 
 		public string Item { get; set; }
 
-		public string ItemQuantlity { get; set; }
+		public int ItemQuantlity { get; set; }
 
 		public double PriceForABox { get; set; }
+
+		public double TotallPrice { get; set; }
 	}
 }
