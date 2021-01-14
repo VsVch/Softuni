@@ -11,7 +11,7 @@ namespace RevercePolishNotation
             //3 3 - 5 -
 
             string[] input = Console.ReadLine()
-                                    .Split()
+                                    .Split(" ", StringSplitOptions.RemoveEmptyEntries)
                                     .Reverse()
                                     .ToArray();
 
