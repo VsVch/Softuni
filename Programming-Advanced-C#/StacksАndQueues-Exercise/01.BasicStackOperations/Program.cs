@@ -36,6 +36,7 @@ namespace _01.BasicStackOperations
             else
             {
                 for (int i = 0; i < s; i++) // ? proverka za povche pop ot po mlko push ?
+                for (int i = 0; i < s; i++) // ? proverka za povche pop ot po mlko push ?
                 {
                     numbers.Pop();
                 }
@@ -47,8 +48,7 @@ namespace _01.BasicStackOperations
             else
             {
                 Console.WriteLine($"{numbers.Min()}");
-            }
-            
+            }    
             
         }
     }
