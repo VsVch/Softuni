@@ -6,12 +6,15 @@ namespace Person
 {
     public class Person
     {
+        private List<Person> family;
+
         private string name;
 
         private int age;
 
         public Person(string name, int age)
         {
+            family = new List<Person>();
             this.Name = name;
             this.Age = age;
         }
@@ -29,7 +32,7 @@ namespace Person
             } 
         }
 
-        public int Age 
+        public virtual int Age 
         {
             get 
             {
@@ -43,6 +46,10 @@ namespace Person
                 }
                 this.age = value;
             } 
+        }
+        public void MyFamilyAdd(Person person) 
+        {
+            this.family.Add(person);
         }
 
         public override string ToString()
