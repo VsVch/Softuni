@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30413.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02.ArrayModifier", "01.SoftUniReception\02.ArrayModifier.csproj", "{CA121AE9-28A0-4363-BA6A-0FE5821747A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03.Numbers", "03.Numbers\03.Numbers.csproj", "{8DA3388E-5C2F-44DE-BD08-FF77A54386AA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CA121AE9-28A0-4363-BA6A-0FE5821747A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA121AE9-28A0-4363-BA6A-0FE5821747A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA121AE9-28A0-4363-BA6A-0FE5821747A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA121AE9-28A0-4363-BA6A-0FE5821747A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DA3388E-5C2F-44DE-BD08-FF77A54386AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DA3388E-5C2F-44DE-BD08-FF77A54386AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DA3388E-5C2F-44DE-BD08-FF77A54386AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DA3388E-5C2F-44DE-BD08-FF77A54386AA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B9B2A6E0-3CFF-4EAF-AEA9-61D8CF8F40F5}
+	EndGlobalSection
+EndGlobal

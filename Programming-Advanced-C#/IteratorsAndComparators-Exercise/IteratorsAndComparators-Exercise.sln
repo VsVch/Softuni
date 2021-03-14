@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30413.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01.ListyIterator", "01.ListyIterator\01.ListyIterator.csproj", "{BC63559D-4D50-48B4-808C-98A83E46F2EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04.Froggy", "04.Froggy\04.Froggy.csproj", "{6E8C63DF-B33F-46F0-861C-C73C4CBB5CEF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BC63559D-4D50-48B4-808C-98A83E46F2EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC63559D-4D50-48B4-808C-98A83E46F2EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC63559D-4D50-48B4-808C-98A83E46F2EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC63559D-4D50-48B4-808C-98A83E46F2EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E8C63DF-B33F-46F0-861C-C73C4CBB5CEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E8C63DF-B33F-46F0-861C-C73C4CBB5CEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E8C63DF-B33F-46F0-861C-C73C4CBB5CEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E8C63DF-B33F-46F0-861C-C73C4CBB5CEF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7E22723F-583D-4DB6-B598-48DAB71F7248}
+	EndGlobalSection
+EndGlobal
