@@ -11,7 +11,8 @@ namespace EasterRaces.Repositories.Entities
         private const double SportsCarCubicCentimeters = 3000;
              
         public SportsCar(string model, int horsePower)
-            : base(model, horsePower, SportsCarCubicCentimeters, SportsCarMinHorsePower, SportsCarMaxHorsePower)
+            : base(model, horsePower, SportsCarCubicCentimeters,
+                  SportsCarMinHorsePower, SportsCarMaxHorsePower)
         {
         }
     }

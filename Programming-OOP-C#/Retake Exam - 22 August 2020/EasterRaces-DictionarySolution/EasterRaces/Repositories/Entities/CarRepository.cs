@@ -5,48 +5,40 @@ using EasterRaces.Utilities.Messages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace EasterRaces.Repositories.Entities
 {
     public class CarRepository : IRepository<ICar>
     {
-        private readonly IDictionary<string, ICar> carsByModel;
+        private readonly IDictionary<string, ICar> carByModel;
 
         public CarRepository()
         {
-            carsByModel = new Dictionary<string, ICar>();
+            carByModel = new Dictionary<string, ICar>();
         }
 
         public void Add(ICar model)
         {
-            if (carsByModel.ContainsKey(model.Model))
+            if (carByModel.ContainsKey(model.Model))
             {
                 throw new ArgumentException(string.Format(ExceptionMessages.CarExists, model.Model));
             }
-            this.carsByModel.Add(model.Model, model);
+            this.carByModel.Add(model.Model, model);
         }
 
         public IReadOnlyCollection<ICar> GetAll()
         {
-            return this.carsByModel.Values.ToList();
+            return this.carByModel.Values.ToList();
         }
 
         public ICar GetByName(string name)
         {
-
-           return this.carsByModel.GetByKeyOrDefault(name);
-        }
-
-        private void GetByKeyOrDefault()
-        {
-            throw new NotImplementedException();
-        }
+            return this.carByModel.GetByKeyOrDefault(name);
+        }        
 
         public bool Remove(ICar model)
-        {           
-
-            return this.carsByModel.Remove(model.Model);
+        {         
+            return this.carByModel.Remove(model.Model);
         }
     }
 }

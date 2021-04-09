@@ -14,12 +14,11 @@ namespace EasterRaces.Repositories.Entities
         private int minHorsePower;
         private int maxHorsePower;
 
-
-        public Car(string model, int horsePower, double cubicCentimeters, int minHorsePower, int maxHorsePower)
-        {
-            
+        protected Car(string model, int horsePower, double cubicCentimeters, int minHorsePower, int maxHorsePower)
+        {            
             this.minHorsePower = minHorsePower;
             this.maxHorsePower = maxHorsePower;
+
             this.Model = model;
             this.HorsePower = horsePower;
             this.CubicCentimeters = cubicCentimeters;

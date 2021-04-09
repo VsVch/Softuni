@@ -10,36 +10,36 @@ namespace EasterRaces.Repositories.Entities
 {
     public class RaceRepository : IRepository<IRace>
     {
-        private IDictionary<string, IRace> racesByName;
+        private IDictionary<string, IRace> raceByName;
 
         public RaceRepository()
         {
-            racesByName = new Dictionary<string, IRace>();
+            raceByName = new Dictionary<string, IRace>();
         }
 
         public void Add(IRace model)
         {
-            if (racesByName.ContainsKey(model.Name))
+            if (raceByName.ContainsKey(model.Name))
             {
-                throw new InvalidOperationException(string.Format(ExceptionMessages.RaceExists));
+                throw new InvalidOperationException(string.Format(ExceptionMessages.RaceExists, model.Name));
             }
 
-            racesByName.Add(model.Name, model);
+            raceByName.Add(model.Name, model);
         }
 
         public IReadOnlyCollection<IRace> GetAll()
         {
-            return this.racesByName.Values.ToList();
+            return this.raceByName.Values.ToList();
         }
 
         public IRace GetByName(string name)
         {
-            return this.racesByName.GetByKeyOrDefault(name);
+            return this.raceByName.GetByKeyOrDefault(name);
         }
 
         public bool Remove(IRace model)
         {
-            return this.racesByName.Remove(model.Name);
+            return this.raceByName.Remove(model.Name);
         }
     }
 }

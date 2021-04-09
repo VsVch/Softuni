@@ -9,8 +9,10 @@ namespace EasterRaces.Repositories.Entities
         private const int MuscleCarMinHorsePower = 400;
         private const int MuscleCarMaxHorsePower = 600;
         private const double MuscleCubicCentimeters = 5000;
+
         public MuscleCar(string model, int horsePower)
-            : base(model, horsePower, MuscleCubicCentimeters, MuscleCarMinHorsePower, MuscleCarMaxHorsePower)
+            : base(model, horsePower, MuscleCubicCentimeters,
+                  MuscleCarMinHorsePower, MuscleCarMaxHorsePower)
         {
         }
     }
