@@ -21,11 +21,12 @@ namespace Bakery.Models.Tables
 
         public Table(int tableNumber, int capacity, decimal pricePerPerson)
         {
+            foodOrders = new List<IBakedFood>();
+            drinkOrders = new List<IDrink>();
             this.TableNumber = tableNumber;
             this.Capacity = capacity;
             this.PricePerPerson = pricePerPerson;
-            foodOrders = new List<IBakedFood>();
-            drinkOrders = new List<IDrink>();
+            
         }
 
         public int TableNumber { get; private set; }
@@ -91,7 +92,7 @@ namespace Bakery.Models.Tables
             }
             //decimal foodCost = foodOrders.Select(f => f.Price).Sum();
             //decimal drinkCost = drinkOrders.Select(f => f.Price).Sum();
-
+            price += this.Price;
             return price;
         }
 
@@ -116,7 +117,7 @@ namespace Bakery.Models.Tables
         public void Reserve(int numberOfPeople)
         {
             IsReserved = true;
-            this.numberOfPeople = numberOfPeople;   
+            this.NumberOfPeople = numberOfPeople;   
         }
     }
 }

@@ -5,6 +5,7 @@ using Bakery.Models.Drinks;
 using Bakery.Models.Drinks.Contracts;
 using Bakery.Models.Tables;
 using Bakery.Models.Tables.Contracts;
+using Bakery.Utilities.Messages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,7 @@ namespace Bakery.Core
         }
 
         public string AddDrink(string type, string name, int portion, string brand)
-        {           
+        {         
 
             if (type == "Water")
             {
@@ -48,7 +49,7 @@ namespace Bakery.Core
             {
                 bakedFoods.Add(new Cake(name, price));
             }
-            else if (type == "Bread")
+            if (type == "Bread")
             {
                 bakedFoods.Add(new Bread(name, price));
             }           
@@ -94,7 +95,7 @@ namespace Bakery.Core
         {
             ITable table = tables.FirstOrDefault(t => t.TableNumber == tableNumber);
 
-            decimal bill = table.GetBill() + table.Price;
+            decimal bill = table.GetBill();
             totalIncome += bill;
             table.Clear();
 
@@ -108,53 +109,66 @@ namespace Bakery.Core
 
         public string OrderDrink(int tableNumber, string drinkName, string drinkBrand)
         {
-            IDrink drink = drinks.FirstOrDefault(d => d.Name == drinkName && d.Brand == drinkBrand);
-
+            
             ITable table = tables.FirstOrDefault(t => t.TableNumber == tableNumber);
 
-            if (drink == null)
-            {
-                return $"There is no {drinkName} {drinkBrand} available";
-            }
             if (table == null)
             {
                 return $"Could not find table {tableNumber}";
             }
-            table.OrderDrink(drink);
-            return $"Table {tableNumber} ordered {drinkName} {drinkBrand}";
+            else
+            {
+                IDrink drink = drinks.FirstOrDefault(d => d.Name == drinkName && d.Brand == drinkBrand);
+                if (drink == null)
+                {
+                    return $"There is no {drinkName} {drinkBrand} available";
+                }
+                else
+                {
+                    table.OrderDrink(drink);
+                    return $"Table {tableNumber} ordered {drinkName} {drinkBrand}";
+                }
+            }         
+                        
         }
 
         public string OrderFood(int tableNumber, string foodName)
-        {
-            IBakedFood food = bakedFoods.FirstOrDefault(f => f.Name == foodName);
+        {          
 
             ITable table = tables.FirstOrDefault(t => t.TableNumber == tableNumber);
 
-            if (food == null)
-            {
-                return $"No {foodName} in the menu";
-            }
             if (table == null)
             {
                 return $"Could not find table {tableNumber}";
             }
-            table.OrderFood(food);
-            return $"Table {tableNumber} ordered {foodName}";
+            else
+            {
+                IBakedFood food = bakedFoods.FirstOrDefault(f => f.Name == foodName);
+                if (food == null)
+                {
+                    return $"No {foodName} in the menu";
+                }
+                else
+                {
+                    table.OrderFood(food);
+                    return $"Table {tableNumber} ordered {foodName}";
+                }                
+            }     
+                       
         }
         
         public string ReserveTable(int numberOfPeople)
         {
-            ITable freeTable = tables.FirstOrDefault(t => t.Capacity >= numberOfPeople && t.IsReserved == false);
-
-           // if (freeTable.Capacity < numberOfPeople || freeTable.IsReserved == true)
+            ITable freeTable = tables.FirstOrDefault(t => !t.IsReserved && t.Capacity >= numberOfPeople);
+           
            if(freeTable == null)
            {
-               return $"No available table for {numberOfPeople} people";
+                return string.Format(OutputMessages.ReservationNotPossible, numberOfPeople);
            }
 
             freeTable.Reserve(numberOfPeople);
 
-            return $"Table {freeTable.TableNumber} has been reserved for {numberOfPeople} people";
+            return string.Format(OutputMessages.TableReserved,freeTable.TableNumber, numberOfPeople);
         }
     }
 }
