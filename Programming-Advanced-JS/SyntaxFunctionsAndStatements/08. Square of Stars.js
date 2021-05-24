@@ -1,43 +1,21 @@
 function solve(num) {
-    //    let matrix = [];
-    //    let currNumber = num;
-    let row = num;
-    let col = num;
-    let symbol = '* ';
 
-    if (currNumber = ' ') {
-        row = 5;
-        col = 5;
+    let matrix = [];
+    let string = '';
 
-        function Matrix(row, col, symbol) {
-            var mat = Array.apply(null, new Array(row)).map(
-                Array.prototype.valueOf,
-                Array.apply(null, new Array(col)).map(
-                    function () {
-                        return symbol;
-                    }
-                )
-            );
-            return mat;
-        }
-
-    } else {
-
-        function Matrix(row, col, symbol) {
-            var mat = Array.apply(null, new Array(row)).map(
-                Array.prototype.valueOf,
-                Array.apply(null, new Array(col)).map(
-                    function () {
-                        return symbol;
-                    }
-                )
-            );
-            return mat;
-        }
-        //console.table(matrix);
+    if (!num) {
+        num = 5;
+    }   
+    
+    for (var i = 0; i < num; i++) {
+        matrix[i] = new Array(num).fill('*').join(' ');
+            string += `${matrix[i]}\n`;
     }
+
+    return string;
+
 }
-    console.log(solve(1));
-    console.log(solve(2));
-    console.log(solve(5));
-    console.log(solve(' '));
+console.log(solve(1));
+console.log(solve(2));
+console.log(solve(5));
+console.log(solve(''));
