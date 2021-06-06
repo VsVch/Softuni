@@ -1,27 +1,32 @@
 function solve() {
-   const output = document.querySelector('textarea');
+   let addProductButtons = document.querySelectorAll('.add-product');
+   let textAreaElementr = document.querySelector('textarea');
+   let checkoutButton = document.querySelector('.checkout');
 
-   const cart =[];
+   let totalPrice = 0;
 
-   document.querySelector('.shopping-cart').addEventListener('click', (ev) => {
-      if (ev.target.tagName =='BUTTON' && ev.target.className == 'add-product') {
-        const product = ev.target.parentNode.parentNode;
-        const title = product.querySelector('.product-title').textContent;
-        const price = Number(product.querySelector('.product-line-price').textContent);
+   let products = [];
 
-        cart.push({title, price});
+   for (const addProductButton of addProductButtons) {
 
-        output.value += `Added ${title} for ${price.toFixed(2)} to the cart.\n`;
-      }
-   });
-   document.querySelector('.checkout').addEventListener('click', () => {
-     const result = cart.reduce((acc, c) => {
-         acc.items.push(c.title);
-         acc.total += c.price;
-         return acc;
-      } , {items: [], total: 0})
+      addProductButton.addEventListener('click', (e) => {
+         let currentProductElement = e.currentTarget.parentElement.parentElement;
+         let productName = currentProductElement.querySelector('.product-title').textContent;
+         let procuctPrice = Number(currentProductElement.querySelector('.product-line-price').textContent);
 
-      output.value += `You bought ${result.items.join(', ')} for ${result.total.toFixed(2)}.`;
+         totalPrice += procuctPrice;
+         products.push(productName);
 
-   });
+         textAreaElementr.textContent += `Added ${productName} for ${procuctPrice.toFixed(2)} to the cart.\n`
+      });
+   }
+   checkoutButton.addEventListener('click', (e)=>{
+      let uniqeElements = products.reduce((a, x) => {
+         if(!a.includes(x)){
+            a.push(x);
+         }
+         return a;
+      },[]);
+      textAreaElementr.textContent += `You bought ${uniqeElements.join(', ')} for ${totalPrice.toFixed(2)}.`
+   })
 }
