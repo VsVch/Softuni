@@ -7,10 +7,6 @@ class ChristmasDinner {
         this.guests = {};
     }
 
-    get budget() {
-        return this._budget;
-    }
-
     set budget(value) {
 
         if (value < 0) {
@@ -20,10 +16,15 @@ class ChristmasDinner {
         this._budget = value;
     }
 
-    shopping([product]) {
-        let [type, price] = product.split(', ');
+    get budget() {
+        return this._budget;
+    }
 
-        if (price < this._budget) {
+   
+
+    shopping([type, price]) {
+       
+        if (price > this.budget) {
             throw new Error('Not enough money to buy this product');
         }
         this.budget -= price;
