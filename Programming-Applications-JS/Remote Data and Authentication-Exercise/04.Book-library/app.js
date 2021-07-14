@@ -46,7 +46,7 @@ async function editBook(formDate, id) {
     editedBook.replaceWith(editHtmlBook);
 }
 
-async function getBooks() {
+async function getBooks() {    
 
     let laodResponce = await fetch(loadUrl);
     let rowDate = await laodResponce.json();
