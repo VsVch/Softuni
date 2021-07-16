@@ -1,5 +1,6 @@
 import { e } from './dom.js';
 import { showHome } from './home.js';
+import { onEdit } from './edit.js';
 
 
 async function getLikseByMovieId(id) {
@@ -47,22 +48,6 @@ async function onDelete(e, id) {
         }        
     }
 }
-
-async function onEdit(e, id){
-        
-    console.log(e.target);
-
-    const responce = await fetch('http://localhost:3030/data/movies/' + id, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-Authorization': sessionStorage.getItem('authToken')
-        },
-        body: JSON.stringify(movie)
-    });
-}
-
-
 
 function createMovieCard(movie, likes, ownlike) {
 

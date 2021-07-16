@@ -18,7 +18,7 @@ async function onSubmit(e) {
     }
 
     let responce = await fetch(`http://localhost:3030/users/register`, {
-        method: 'get',
+        method: 'post',
         headers: {
             'Content-Type': 'application/json'
         },
