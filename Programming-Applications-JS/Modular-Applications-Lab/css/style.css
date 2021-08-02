@@ -1,0 +1,13 @@
+.login-container {
+    width: 400px;
+}
+
+.side-wrapper{
+    width: 1200px;
+    margin: auto;
+}
+
+.movie-list{
+    display: flex;
+    list-style: none;
+}
