@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Complexity", "Complexity\Complexity.csproj", "{0B66FF13-BD93-4717-ACF2-1AF36C190E0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BigComplexity", "BigComplexity\BigComplexity.csproj", "{12A8FF36-4EB5-4B0B-AE45-D4C4A7D4DEB4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0B66FF13-BD93-4717-ACF2-1AF36C190E0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B66FF13-BD93-4717-ACF2-1AF36C190E0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B66FF13-BD93-4717-ACF2-1AF36C190E0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B66FF13-BD93-4717-ACF2-1AF36C190E0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12A8FF36-4EB5-4B0B-AE45-D4C4A7D4DEB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12A8FF36-4EB5-4B0B-AE45-D4C4A7D4DEB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12A8FF36-4EB5-4B0B-AE45-D4C4A7D4DEB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12A8FF36-4EB5-4B0B-AE45-D4C4A7D4DEB4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {46998936-A0A8-496E-BF49-9069CDBEB51B}
+	EndGlobalSection
+EndGlobal
