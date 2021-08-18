@@ -1,4 +1,3 @@
-import { showCreate } from './create.js'
 
 let main;
 let section;

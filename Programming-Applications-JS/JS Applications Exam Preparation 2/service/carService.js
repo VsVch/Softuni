@@ -29,9 +29,8 @@ async function deleteItem(id) {
 
 async function getMy(userId) {
     
-    let result = await jsonRequest(`${baseUrl}/data/cars?where=_ownerId%3D%22${userId}%22&sortBy=_createdOn%20desc`);
-    console.log(result)
-    return result;                                  
+    let result = await jsonRequest(`http://localhost:3030/data/cars?where=_ownerId%3D%22${userId}%22&amp;sortBy=_createdOn%20desc`);
+    return result;
 }
 
 async function getByYear(year) {
