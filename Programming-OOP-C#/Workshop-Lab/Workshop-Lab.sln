@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31105.61
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DependenciInjectionWorkoshop", "DependenciInjectionWorkoshop\DependenciInjectionWorkoshop.csproj", "{8CA3B960-4FCB-4426-A1EE-6C469BC52291}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8CA3B960-4FCB-4426-A1EE-6C469BC52291}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CA3B960-4FCB-4426-A1EE-6C469BC52291}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CA3B960-4FCB-4426-A1EE-6C469BC52291}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CA3B960-4FCB-4426-A1EE-6C469BC52291}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5C548A4D-FBFC-4181-A3B8-265E195305F2}
+	EndGlobalSection
+EndGlobal
