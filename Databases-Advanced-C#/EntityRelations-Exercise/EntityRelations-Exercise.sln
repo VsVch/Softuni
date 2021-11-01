@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Student System", "Student System\Student System.csproj", "{DBFF7E42-8E62-4CE1-855D-42B0B7876A1B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FootballBookmakerSystem", "FootballBookmakerSystem\FootballBookmakerSystem.csproj", "{B0C8F3A5-8B91-4580-AA6D-5ACABAB6573C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DBFF7E42-8E62-4CE1-855D-42B0B7876A1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBFF7E42-8E62-4CE1-855D-42B0B7876A1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBFF7E42-8E62-4CE1-855D-42B0B7876A1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBFF7E42-8E62-4CE1-855D-42B0B7876A1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0C8F3A5-8B91-4580-AA6D-5ACABAB6573C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0C8F3A5-8B91-4580-AA6D-5ACABAB6573C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0C8F3A5-8B91-4580-AA6D-5ACABAB6573C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0C8F3A5-8B91-4580-AA6D-5ACABAB6573C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E2C09925-1170-4BC6-9ADF-AD24F230BC3D}
+	EndGlobalSection
+EndGlobal
