@@ -1,0 +1,48 @@
+body nav {
+    background-color: dimgray;
+}
+ul li {    
+  display: inline-block;  
+  margin:  20px; 
+    
+}
+
+ul {
+    margin: 0;
+    text-align:center
+}
+
+nav ul li a{
+    font-family: Helvetica, sans-serif sans-serif;
+    text-decoration:  none;
+    color:  white;
+}
+
+section {
+    border: 1px solid blue;
+    padding: 10 px;   
+   
+}
+
+section h1{
+    text-align: center;
+}
+
+
+section article {
+    border: 1px solid red;
+   
+}
+
+footer p {
+    display: inline-block;
+    color: white;     
+    padding:  10 px;
+}
+
+footer {
+    text-align: center;
+    margin:  30 px;
+    background-color: dimgray;
+}
+
