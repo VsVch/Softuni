@@ -1,0 +1,27 @@
+
+header nav ul li a:hover{
+
+    background: rgb(199, 199, 199);
+    color: white;
+}
+
+header nav ul {
+    list-style-type: none;   
+    background-color: rgb(199, 199, 199);
+    display: flex;
+    justify-content: center;
+    padding-top: 10px; 
+    
+}
+
+header nav ul li {
+    float: left;
+}
+
+header nav ul li a {
+    display: block;
+    color: rgb(24, 150, 55);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
