@@ -1,0 +1,91 @@
+body  {
+    background-color: #F0F1F5;
+    margin: 0px;
+    font-family:Helvetica, sans-serif;
+    padding: 1rem;
+}
+
+nav{
+    text-align: right;
+    margin: 12px 10px;
+    padding: 1px;
+}
+
+
+p {
+    float: left;
+    color: #F9690E;
+    padding: 0px 5px; 
+}
+
+nav ul li {
+    display: inline-block;
+}
+
+nav ul li a {
+    color: #F9690E;
+    text-decoration: none;
+    
+}
+
+main section:nth-child(1) {
+   background-image: url("../Requirements-and-Resources/Images/picture.jpg");
+   background-size: cover;
+   background-position: center;
+   padding: 11rem 7rem;
+   margin: 0px 4px;
+}
+
+main section:nth-child(1) h1 {
+    color:  white;
+}
+
+main section:nth-child(1) h1 span {
+    color: #F9690E;
+}
+
+main section:nth-child(1) button {
+    background: #F9690E;
+    border: none;
+    color: white;
+    font-size: 16px;
+    padding: 10px;    
+    position: absolute;
+    left: 350px;    
+}
+
+main section:nth-child(1) button:hover {
+    color: #F9690E;    
+    background: white;      
+}
+
+main section:nth-child(2) article{
+    display: inline-block;
+    background: #F9690E;
+    color: white;
+    width: 29%;
+    padding: 9px 11px;
+    margin: 0px 0px 0px 4px;
+}
+main section:nth-child(2) article h3{           
+    text-align:  center;
+}
+
+main section:nth-child(2) p{           
+    color: white;
+}
+
+footer article {
+    display: inline-block;
+    padding: 13px 1px 1px 38px;
+}
+
+footer article:nth-child(2){    
+    text-align: right;
+}
+footer i {
+    padding: 10px;
+}
+
+
+
