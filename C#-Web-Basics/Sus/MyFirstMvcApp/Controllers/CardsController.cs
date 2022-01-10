@@ -1,4 +1,6 @@
-﻿using SUS.HTTP;
+﻿using BattleCards.Data;
+using MyFirstMvcApp.ViewModels;
+using SUS.HTTP;
 using SUS.mvcFramework;
 using System;
 using System.Collections.Generic;
@@ -10,17 +12,37 @@ namespace MyFirstMvcApp.Controllers
 {
     public class CardsController : Controller
     {
-        public HttpResponse Add(HttpRequest request)
+        public HttpResponse Add()
         {
             return this.View();
         }
 
-        public HttpResponse All(HttpRequest request)
+        [HttPost("/Cards/Add")]
+        public HttpResponse DoAdd() 
+        {
+            var dbContext = new ApplicationDbContext();
+            dbContext.Cards.Add(new Card 
+            { 
+                Attack = int.Parse(this.Request.FormDate["attack"]),
+                Health = int.Parse(this.Request.FormDate["health"]),
+                Description = this.Request.FormDate["description"],
+                Name = this.Request.FormDate["name"],
+                ImageUrl = this.Request.FormDate["image"],
+                Keyword = this.Request.FormDate["keyword"],
+                
+            });
+
+            dbContext.SaveChanges();
+
+            return this.View();
+        }
+
+        public HttpResponse All()
         {
             return this.View();
         }
 
-        public HttpResponse Collection(HttpRequest request)
+        public HttpResponse Collection()
         {
             return this.View();
         }

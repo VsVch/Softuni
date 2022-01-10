@@ -8,14 +8,20 @@ namespace MyFirstMvcApp.Controllers
 {
     public class UsersController : Controller
     {
-        public HttpResponse Register(HttpRequest arg)
+        public HttpResponse Register()
         {         
             return this.View();
         }
 
-        public HttpResponse Login(HttpRequest request)
+        public HttpResponse Login()
         {           
             return this.View();
         }
+
+        //[HttPost]
+        //public HttpRequest DoLogin()
+        //{
+        //    return Redirect("/");
+        //}
     }
 }
