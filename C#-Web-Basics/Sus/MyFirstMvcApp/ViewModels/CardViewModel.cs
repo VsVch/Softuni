@@ -9,6 +9,7 @@ namespace BattleCards.ViewModels
     public class CardViewModel
     {
         public int Id { get; set; }
+
         public string ImageUrl { get; set; }
 
         public string Name { get; set; }
@@ -19,6 +20,8 @@ namespace BattleCards.ViewModels
 
         public int Health { get; set; }
 
-       
+        public string Description { get; set; }
+
+
     }
 }

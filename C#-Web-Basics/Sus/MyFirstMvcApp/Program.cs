@@ -1,11 +1,11 @@
-﻿using MyFirstMvcApp.Controllers;
+﻿using BattleCards.Controllers;
 using SUS.HTTP;
 using SUS.mvcFramework;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace MyFirstMvcApp
+namespace BattleCards
 {
     public class Program
     {

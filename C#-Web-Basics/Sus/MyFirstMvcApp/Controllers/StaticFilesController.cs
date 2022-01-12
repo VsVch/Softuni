@@ -2,7 +2,7 @@
 using SUS.mvcFramework;
 using System.IO;
 
-namespace MyFirstMvcApp.Controllers
+namespace BattleCards.Controllers
 {
     public class StaticFilesController : Controller
     {
