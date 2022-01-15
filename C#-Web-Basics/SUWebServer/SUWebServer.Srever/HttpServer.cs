@@ -35,6 +35,10 @@ namespace SUWebServer.Srever
                 var networkStreem = connection.GetStream();
 
                 WriteResponse(networkStreem, "Hello from the server!");
+
+                var request = ReadRequest(networkStreem);
+
+                Console.WriteLine(request);
                                               
                 //connection.Close();
             }
@@ -54,6 +58,31 @@ Content-Length: {contentLength}
 
             networkStreem.Write(responseBytes);
 
+        }
+
+        private string ReadRequest(NetworkStream networkStream)
+        {
+            var bufferLenght = 1024;
+            var buffer = new byte[bufferLenght];
+
+            var requestBuilder = new StringBuilder();
+            var totalbytes = 0;
+            do
+            {
+                var bytesRead = networkStream.Read(buffer, 0, bufferLenght);
+
+                totalbytes += bytesRead;
+
+                if (totalbytes > 10 * 1024)
+                {
+                    throw new InvalidOperationException("Request is ti large.");
+                }
+
+                requestBuilder.Append(Encoding.UTF8.GetString(buffer, 0, bufferLenght));
+
+            } while (networkStream.DataAvailable);
+
+            return requestBuilder.ToString();
         }
     }
 }
