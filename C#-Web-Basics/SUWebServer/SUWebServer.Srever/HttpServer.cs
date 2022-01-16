@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SUWebServer.Srever.HTTP;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -14,53 +15,76 @@ namespace SUWebServer.Srever
         private readonly int port;
         private readonly TcpListener serverListener;
 
-        public HttpServer(string ipAddres, int port)
+        private readonly RoutingTable routingTable;
+
+        public HttpServer(
+            int port,
+            Action<IRoutingTable> routingTable)
+            : this("127.0.0.1", port, routingTable)
+        {
+        }
+
+        public HttpServer(Action<IRoutingTable> routingTable)
+            : this(8080, routingTable)
+        {
+        }
+
+        public HttpServer(
+            string ipAddres,
+            int port,
+            Action <IRoutingTable> routingTableConfiguration)
         {
             this.ipAddres = IPAddress.Parse(ipAddres);
             this.port = port;
 
             this.serverListener = new TcpListener(this.ipAddres, port);
+
+            routingTableConfiguration(this.routingTable = new RoutingTable());
         }
 
-        public void Start() 
+        public async Task Start()
         {
             this.serverListener.Start();
 
             Console.WriteLine($"Server started on potr {this.port}...!");
             Console.WriteLine($"Listening for request...");
+
             while (true)
             {
-                var connection = serverListener.AcceptTcpClient();
+                var connection = await serverListener.AcceptTcpClientAsync();
 
-                var networkStreem = connection.GetStream();
+                _ = Task.Run(async () =>
+                {
+                    var networkStreem = connection.GetStream();                   
 
-                WriteResponse(networkStreem, "Hello from the server!");
+                    var requestText = await ReadRequest(networkStreem);
 
-                var request = ReadRequest(networkStreem);
+                    Console.WriteLine(requestText);
 
-                Console.WriteLine(request);
-                                              
-                //connection.Close();
+                    var request = Request.Parse(requestText);
+
+                    var response = this.routingTable.MatchRequest(request);
+                    
+                    if (response.PreRenderAction != null)
+                    {
+                        response.PreRenderAction(request, response);
+                    }
+
+                   await WriteResponse(networkStreem, response);
+
+                    connection.Close();
+                });
             }
         }
 
-        private void WriteResponse(NetworkStream networkStreem, string messege)
+        private async Task WriteResponse(NetworkStream networkStreem, Response response)
         {
-            var contentLength = Encoding.UTF8.GetByteCount(messege);
-
-            var response = $@"HTTP/1.1 200 OK
-Content-Type: text/plain; charset=UTF-8
-Content-Length: {contentLength}
-
-{messege}";
-
-            var responseBytes = Encoding.UTF8.GetBytes(response);
-
-            networkStreem.Write(responseBytes);
-
+            var responseBytes = Encoding.UTF8.GetBytes(response.ToString());  
+            
+            await networkStreem.WriteAsync(responseBytes);
         }
 
-        private string ReadRequest(NetworkStream networkStream)
+        private async Task<string> ReadRequest(NetworkStream networkStream)
         {
             var bufferLenght = 1024;
             var buffer = new byte[bufferLenght];
@@ -69,7 +93,8 @@ Content-Length: {contentLength}
             var totalbytes = 0;
             do
             {
-                var bytesRead = networkStream.Read(buffer, 0, bufferLenght);
+                var bytesRead = await networkStream.ReadAsync(
+                    buffer, 0, bufferLenght);
 
                 totalbytes += bytesRead;
 

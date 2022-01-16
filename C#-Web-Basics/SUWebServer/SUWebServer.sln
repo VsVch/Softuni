@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.32014.148
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32106.194
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SUWebServer", "SUWebServer\SUWebServer.csproj", "{32F7E8F1-1B85-409F-91F2-C42998CE7A87}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SUWebServer", "SUWebServer\SUWebServer.csproj", "{32F7E8F1-1B85-409F-91F2-C42998CE7A87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SUWebServer.Srever", "SUWebServer.Srever\SUWebServer.Srever.csproj", "{96E8E76F-CC41-42A7-B2C7-D32A308932E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SUWebServer.Srever", "SUWebServer.Srever\SUWebServer.Srever.csproj", "{96E8E76F-CC41-42A7-B2C7-D32A308932E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

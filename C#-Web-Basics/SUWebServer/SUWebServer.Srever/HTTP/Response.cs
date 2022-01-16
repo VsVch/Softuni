@@ -1,4 +1,6 @@
-﻿namespace SUWebServer.Srever.HTTP
+﻿using System.Text;
+
+namespace SUWebServer.Srever.HTTP
 {
     public class Response
     {
@@ -6,8 +8,8 @@
         {
             this.StatusCode = statusCode;
 
-            this.Headers.Add("Server", "My Web Serevr");
-            this.Headers.Add("Date", $"{DateTime.UtcNow}");
+            this.Headers.Add(Header.Server, "My Web Serevr");
+            this.Headers.Add(Header.Date, $"{DateTime.UtcNow}");
         }
 
         public StatusCode StatusCode { get; init; }
@@ -16,60 +18,26 @@
 
         public string Body { get; set; }
 
-        public static Request Parse(string request)
+        public Action<Request,Response> PreRenderAction { get;protected set; }
+
+        public override string ToString()
         {
-            var lines = request.Split("\r\n");
+            var result = new StringBuilder();
 
-            var startLine = lines.First().Split(" ");
+            result.AppendLine($"HTTP/1.1 {(int)this.StatusCode} {this.StatusCode}");
 
-            var method = ParseMethod(startLine[0]);
-            var url = startLine[1];
+            foreach (var header in this.Headers)
+            {
+                result.AppendLine(header.ToString());
+            }
+            result.AppendLine();
 
-            var headers = ParseHeaders(lines.Skip(1));
-
-            var body = lines.Skip(headers.Count + 2).ToArray();
-
-            return null;
+            if (!string.IsNullOrEmpty(this.Body))
+            {
+                result.Append(this.Body);
+            }
+            return result.ToString();
         }
 
-        private static HeaderCollection ParseHeaders(IEnumerable<string> headerLines)
-        {
-            var headerCollection = new HeaderCollection();
-
-            foreach (var headerLine in headerLines)
-            {
-                if (headerLine == string.Empty)
-                {
-                    break;
-                }
-
-                var headerParts = headerLine.Split(":", 2);
-
-                if (headerParts.Length != 2)
-                {
-                    throw new InvalidOperationException("request is not valid");
-                }
-
-                var headerName = headerParts[0];
-                var headerValue = headerParts[1];
-
-                headerCollection.Add(headerName, headerValue);                               
-            }
-
-            return headerCollection;
-        }
-
-        private static object ParseMethod(string method)
-        {
-            try
-            {
-                return (Method)Enum.Parse(typeof(Method), method, true);
-            }
-            catch (Exception)
-            {
-
-                throw new InvalidOperationException($"Method '{method}' is not supported");
-            }
-        }
     }
 }
