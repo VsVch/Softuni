@@ -3,6 +3,7 @@
     using System.Net;
     using System.Text;
     using System.Net.Sockets;
+    using TestMVCServer.Server.Routing;
     using TestMVCServer.Server.Http;
 
     public class HttpServer
@@ -11,13 +12,26 @@
         private readonly int port;
         private readonly TcpListener listener;
 
-        public HttpServer(IPAddress ipAddress, int port)
+        private readonly RoutingTable routingTable;
+
+        public HttpServer(string ipAddress, int port, Action<IRoutingTable> routingTableConfiguration)
         {
-            this.ipAddress = ipAddress;
+            this.ipAddress = IPAddress.Parse(ipAddress);
             this.port = port;
 
             this.listener = new TcpListener(this.ipAddress, port);
+
+            this.routingTable = new RoutingTable();
+            routingTableConfiguration(this.routingTable);
         }
+
+        public HttpServer(int port, Action<IRoutingTable> routingTable)
+         : this("127.0.0.1", port, routingTable)
+        { }
+
+        public HttpServer(Action<IRoutingTable> routingTable)
+            : this(9090, routingTable)
+        { }
 
         public async Task Start()
         {         
@@ -34,28 +48,21 @@
                 var networkStream = connection.GetStream();             
                                
                 var requestText = await ReadRequest(networkStream, connection);
+                                
+                var request = HttpRequest.Parse(requestText);
 
-                Console.WriteLine(requestText);
+                var response = this.routingTable.MatchRequest(request);
 
-                //var request = HttpRequest.Parse(requestText);
-
-                await WriteResponse(networkStream);
+                await WriteResponse(networkStream, response);
 
                 connection.Close();
             }
         }
 
-        private async Task WriteResponse(NetworkStream networkStream) 
+        private async Task WriteResponse(
+            NetworkStream networkStream, HttpResponse response) 
         {
-            var content = "Здрасти от Сашеца";
-            var contentLength = Encoding.UTF8.GetByteCount(content);
-
-            var response = $@"HTTP/1.1 200 OK
-Content-Length: {contentLength}
-Content-Type: text/plain; charset=UTF-8
-
-{content}";
-            var responseBytes = Encoding.UTF8.GetBytes(response);
+            var responseBytes = Encoding.UTF8.GetBytes(response.ToString());
             await networkStream.WriteAsync(responseBytes);
         }
 
