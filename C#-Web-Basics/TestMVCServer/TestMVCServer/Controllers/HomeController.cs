@@ -1,13 +1,19 @@
-﻿using TestMVCServer.Server.Http;
+﻿using TestMVCServer.Server.Controller;
+using TestMVCServer.Server.Http;
 
-namespace TestMVCServer.Controlers
+namespace TestMVCServer.Controllers
 {
-
-    public class HomeController
+    public class HomeController : Controller
     {
-        //public HttpResponse Index() 
-        //{
-        //   // return new HttpResponse();
-        //}
+        public HomeController(HttpRequest request)
+            : base(request)
+        {
+        }
+
+        public HttpResponse Index() => Text("Hello from Sand!");
+
+        public HttpResponse LocalRedirect() => Redirect("/Cats");
+
+        public HttpResponse ToSoftUni() => Redirect("https://softuni.bg");
     }
 }
