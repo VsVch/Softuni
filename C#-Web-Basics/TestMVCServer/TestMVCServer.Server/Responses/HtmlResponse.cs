@@ -1,9 +1,11 @@
-﻿namespace TestMVCServer.Server.Responses
+﻿using TestMVCServer.Server.Http;
+
+namespace TestMVCServer.Server.Responses
 {
     public class HtmlResponse : ContentResponse
     {
         public HtmlResponse(string html)
-            : base(html, "text/html; charset=UTF-8")
+            : base(html, HttpContentType.Html)
         {
         }
     }

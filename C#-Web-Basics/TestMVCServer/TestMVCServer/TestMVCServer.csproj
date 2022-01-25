@@ -12,4 +12,33 @@
     <ProjectReference Include="..\TestMVCServer.Server\TestMVCServer.Server.csproj" />
   </ItemGroup>
 
+	<ItemGroup>
+		<Content Include="Views\**\*.*">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Views\Animals\Wild\Bunnies.cshtml" />
+	  <None Remove="Views\Animals\Wild\Turtles.cshtml" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Update="Views\Animals\Rabbits.cshtml">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Update="Views\Animals\Dogs.cshtml">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Update="Views\Animals\Wild\Turtles.cshtml">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="Views\Animals\Dogs.cshtml">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
 </Project>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using TestMVCServer.Server.Common;
 
 namespace TestMVCServer.Server.Http
 {   
@@ -13,11 +14,11 @@ namespace TestMVCServer.Server.Http
             this.Headers.Add("Date", $"{DateTime.UtcNow:r}");
         }
 
-        public HttpStatusCode StatusCode { get; init; }
+        public HttpStatusCode StatusCode { get; protected set; }
 
         public HttpHeaderCollection Headers { get; init; } = new HttpHeaderCollection();
 
-        public string Content { get; init; }
+        public string Content { get; protected set; }
 
         public override string ToString()
         {
@@ -38,6 +39,19 @@ namespace TestMVCServer.Server.Http
             }            
 
             return result.ToString();
+        }
+
+        protected void PrepareContent(string content, string contentType) 
+        {
+            Guard.AgainstNull(content, nameof(content));
+            Guard.AgainstNull(contentType, nameof(contentType));
+
+            var contentLength = Encoding.UTF8.GetByteCount(content).ToString();
+
+            this.Headers.Add(HttpContentType.ContentType, contentType);
+            this.Headers.Add(HttpContentType.ContentLength, contentLength);
+
+            this.Content = content;
         }
     }
 }

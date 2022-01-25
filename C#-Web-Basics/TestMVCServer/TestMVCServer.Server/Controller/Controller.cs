@@ -1,4 +1,5 @@
-﻿using TestMVCServer.Server.Http;
+﻿using System.Runtime.CompilerServices;
+using TestMVCServer.Server.Http;
 using TestMVCServer.Server.Response;
 using TestMVCServer.Server.Responses;
 
@@ -20,5 +21,11 @@ namespace TestMVCServer.Server.Controller
 
         protected HttpResponse Redirect(string location)
           => new RedirectResponse(location);
+
+        protected HttpResponse View([CallerMemberName] string viewName = "")
+            => new ViewResponse(viewName, this.GetControllerName());
+
+        private string GetControllerName()
+            => this.GetType().Name.Replace(nameof(Controller), string.Empty);
     }
 }
