@@ -1,4 +1,5 @@
-﻿using TestMVCServer.Server.Controller;
+﻿using TestMVCServer.Models.Animals;
+using TestMVCServer.Server.Controller;
 using TestMVCServer.Server.Http;
 
 namespace TestMVCServer.Controllers
@@ -15,16 +16,25 @@ namespace TestMVCServer.Controllers
         public HttpResponse Cats()
         {
             const string nameKey = "Name";
+            const string ageKey = "Age";
 
             var query = this.Request.Query;
 
             var catName = query.ContainsKey(nameKey)
                 ? query[nameKey]
-                : "the Cats";
+                : "the cats";
 
-            var result = $"<h1>Hello from {catName}!</h1>";
+            var catAge = query.ContainsKey(ageKey)
+                ? int.Parse(query[ageKey])
+                : 0;
 
-            return Html(result);            
+            var vielModel = new CatViewModel
+            {
+                Name = catName,
+                Age = catAge,
+            };
+
+            return View(vielModel);
         }
 
         public HttpResponse Dogs() => View();

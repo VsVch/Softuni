@@ -12,13 +12,14 @@ namespace TestMVCServer.Server.Http
 
         public string Path { get; private set; }
 
-        public Dictionary<string, string> Query { get; private set; }
-
         public string Body { get; private set; }
 
-        public HttpHeaderCollection Headers { get; private set; }
+        public IReadOnlyDictionary<string, string> Query { get; private set; }
 
-
+        public IReadOnlyDictionary<string, string> Form { get; protected set; }
+              
+        public IReadOnlyDictionary<string, HttpHeader> Headers { get; private set; }
+               
         public static HttpRequest Parse(string reqest)
         {
             var lines = reqest.Split(NewLine);
@@ -37,23 +38,26 @@ namespace TestMVCServer.Server.Http
             var headers = ParseHttpHeaders(headersLine);
 
             var body = string.Join(NewLine, lines.Skip(headers.Count + 2).ToArray());
-            var newResponse =
-            new HttpRequest
+
+            var form = ParseForm(headers, body);
+
+            var newResponse = new HttpRequest
             {
                 Method = method,
                 Path = path,
                 Query = query,
                 Headers = headers,
                 Body = body,
+                Form = form,
             };
 
             return newResponse;
 
-        }
+        }        
 
-        private static HttpHeaderCollection ParseHttpHeaders(IEnumerable<string> headersLine)
+        private static new Dictionary<string, HttpHeader> ParseHttpHeaders(IEnumerable<string> headersLine)
         {
-            var headersCollection = new HttpHeaderCollection();
+            var headersCollection = new Dictionary<string, HttpHeader>();
 
             foreach (var headerLine in headersLine)
             {
@@ -70,12 +74,9 @@ namespace TestMVCServer.Server.Http
                 }
 
                 var name = headerParts[0];
-                var value = headerParts[1].Trim();
+                var value = headerParts[1].Trim();               
 
-                var header = new HttpHeader(name, value);
-
-
-                headersCollection.Add(name, value);
+                headersCollection.Add(name, new HttpHeader(name, value));
             }
 
             return headersCollection;
@@ -109,6 +110,19 @@ namespace TestMVCServer.Server.Http
                     .Select(part => part.Split('='))
                     .Where(part => part.Length == 2)
                     .ToDictionary(k => k[0], v => v[1]);
-        
+
+        private static Dictionary<string, string> ParseForm(Dictionary<string, HttpHeader> headers, string body)
+        {
+            var result = new Dictionary<string, string>();
+
+            if (headers.ContainsKey(HttpHeader.ContentType) 
+                && headers[HttpHeader.ContentType].Value == HttpContentType.FormUrlEncoded)
+            {
+                result = ParseQuery(body);
+            }
+
+            return result;
+        }
+
     }
 }

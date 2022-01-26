@@ -20,10 +20,15 @@
 
 	<ItemGroup>
 	  <None Remove="Views\Animals\Wild\Bunnies.cshtml" />
+	  <None Remove="Views\Animals\Wild\Cats.cshtml" />
 	  <None Remove="Views\Animals\Wild\Turtles.cshtml" />
+	  <None Remove="Views\Cats\Create.cshtml" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Content Update="Views\Animals\Cats.cshtml">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
 	  <Content Update="Views\Animals\Rabbits.cshtml">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
