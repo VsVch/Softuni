@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using TestMVCServer.Server.Http;
+﻿using TestMVCServer.Server.Http;
 
-namespace TestMVCServer.Server.Responses
+namespace TestMVCServer.Server.Results
 {   
 
-    public class ViewResponse : HttpResponse
+    public class ViewResult : ActionResult
     {
         private const char PathSeparator = '/';
 
-        public ViewResponse(string viewName, string controlerName, object model)
-            : base(HttpStatusCode.OK)
+        public ViewResult(
+            HttpResponse response,
+            string viewName,
+            string controlerName,
+            object model)
+            : base(response)
         => this.GetHtml(viewName, controlerName, model);
        
         private void GetHtml(string viewName, string controlerName, object model) 

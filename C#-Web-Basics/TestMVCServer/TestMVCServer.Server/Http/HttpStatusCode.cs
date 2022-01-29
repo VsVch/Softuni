@@ -1,5 +1,4 @@
-﻿
-namespace TestMVCServer.Server.Http
+﻿namespace TestMVCServer.Server.Http
 {
     public enum HttpStatusCode
     {

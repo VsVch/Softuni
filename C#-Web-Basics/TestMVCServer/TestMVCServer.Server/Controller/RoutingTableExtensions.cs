@@ -1,5 +1,4 @@
-﻿
-using TestMVCServer.Server.Http;
+﻿using TestMVCServer.Server.Http;
 using TestMVCServer.Server.Routing;
 
 namespace TestMVCServer.Server.Controller

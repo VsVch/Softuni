@@ -1,6 +1,6 @@
 ﻿using TestMVCServer.Server.Common;
 using TestMVCServer.Server.Http;
-using TestMVCServer.Server.Responses;
+using TestMVCServer.Server.Results;
 using HttpMethod = TestMVCServer.Server.Http.HttpMethod;
 
 namespace TestMVCServer.Server.Routing
@@ -55,7 +55,7 @@ namespace TestMVCServer.Server.Routing
             if (!this.routes.ContainsKey(requestMethod)
                 || !this.routes[requestMethod].ContainsKey(reqestPath))
             {
-                return new NotFoundResponse();
+                return new HttpResponse(HttpStatusCode.NotFound);
             }
 
             var responseFunction = this.routes[requestMethod][reqestPath];

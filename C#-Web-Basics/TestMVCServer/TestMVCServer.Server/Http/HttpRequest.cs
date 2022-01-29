@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace TestMVCServer.Server.Http
+﻿namespace TestMVCServer.Server.Http
 {
     public class HttpRequest
     {
@@ -19,7 +15,9 @@ namespace TestMVCServer.Server.Http
         public IReadOnlyDictionary<string, string> Form { get; protected set; }
               
         public IReadOnlyDictionary<string, HttpHeader> Headers { get; private set; }
-               
+
+        public IReadOnlyDictionary<string, HttpCookie> Cookies { get; private set; }
+
         public static HttpRequest Parse(string reqest)
         {
             var lines = reqest.Split(NewLine);
@@ -28,14 +26,16 @@ namespace TestMVCServer.Server.Http
                 .First()
                 .Split(" ");
 
-            var method = ParseHttpMethod(startLine[0]);
+            var method = ParseMethod(startLine[0]);
             var url = startLine[1];
 
             var (path, query) = ParseUrl(url);
 
             var headersLine = lines.Skip(1);
 
-            var headers = ParseHttpHeaders(headersLine);
+            var headers = ParseHeaders(headersLine);
+
+            var cookies = ParseCookies(headers);
 
             var body = string.Join(NewLine, lines.Skip(headers.Count + 2).ToArray());
 
@@ -47,15 +47,37 @@ namespace TestMVCServer.Server.Http
                 Path = path,
                 Query = query,
                 Headers = headers,
+                Cookies = cookies,
                 Body = body,
                 Form = form,
             };
 
             return newResponse;
+        }
 
-        }        
+        private static HttpMethod ParseMethod(string method)
+           => method.ToUpper() switch
+           {
+               "GET" => HttpMethod.Get,
+               "POST" => HttpMethod.Post,
+               "PUT" => HttpMethod.Put,
+               "DELETE" => HttpMethod.Delete,
+               _ => throw new InvalidOperationException($"Method '{method}' is not supported")
+           };
 
-        private static new Dictionary<string, HttpHeader> ParseHttpHeaders(IEnumerable<string> headersLine)
+        private static (string, Dictionary<string, string>) ParseUrl(string url)
+        {
+            var urlParts = url.Split('?');
+
+            var path = urlParts[0].ToLower();
+            var query = urlParts.Length > 1
+                ? ParseQuery(urlParts[1])
+                : new Dictionary<string, string>(); ;
+
+            return (path, query);
+        }
+
+        private static Dictionary<string, HttpHeader> ParseHeaders(IEnumerable<string> headersLine)
         {
             var headersCollection = new Dictionary<string, HttpHeader>();
 
@@ -82,35 +104,32 @@ namespace TestMVCServer.Server.Http
             return headersCollection;
         }
 
-        private static HttpMethod ParseHttpMethod(string method)
-            => method.ToUpper() switch
-            {
-                "GET" => HttpMethod.Get,
-                "POST" => HttpMethod.Post,
-                "PUT" => HttpMethod.Put,
-                "DELETE" => HttpMethod.Delete,
-                _ => throw new InvalidOperationException($"Method '{method}' is not supported")
-            };
-
-        private static (string, Dictionary<string, string>) ParseUrl(string url)
+        private static Dictionary<string, HttpCookie> ParseCookies(Dictionary<string, HttpHeader> headers)
         {
-            var urlParts = url.Split('?');
+            var cookieCollection = new Dictionary<string, HttpCookie>();
 
-            var path = urlParts[0].ToLower();
-            var query = urlParts.Length > 1
-                ? ParseQuery(urlParts[1])
-                : new Dictionary<string, string>(); ;
+            if (headers.ContainsKey(HttpHeader.Cookie))
+            {
+                var cookieHeader = headers[HttpHeader.Cookie];
 
-            return (path, query);
-        }
+                var allCookies = cookieHeader
+                    .Value
+                    .Split(';');
 
-        private static Dictionary<string, string> ParseQuery(string queryString)
-            => queryString
-                    .Split('&')
-                    .Select(part => part.Split('='))
-                    .Where(part => part.Length == 2)
-                    .ToDictionary(k => k[0], v => v[1]);
+                foreach (var cookie in allCookies)
+                {
+                    var cookiePart = cookie.Split('=');
 
+                    var cookieName = cookiePart[0].Trim();
+                    var cookieValue = cookiePart[1].Trim();
+
+                    cookieCollection.Add(cookieName, new HttpCookie(cookieName, cookieValue));
+                }
+            }
+
+            return cookieCollection;
+        }            
+              
         private static Dictionary<string, string> ParseForm(Dictionary<string, HttpHeader> headers, string body)
         {
             var result = new Dictionary<string, string>();
@@ -123,6 +142,12 @@ namespace TestMVCServer.Server.Http
 
             return result;
         }
+        private static Dictionary<string, string> ParseQuery(string queryString)
+            => queryString
+                    .Split('&')
+                    .Select(part => part.Split('='))
+                    .Where(part => part.Length == 2)
+                    .ToDictionary(k => k[0], v => v[1]);
 
     }
 }

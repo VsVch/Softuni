@@ -5,9 +5,7 @@ using TestMVCServer.Server.Http;
 namespace TestMVCServer.Controllers
 {
     public class AnimalsController : Controller
-    {
-        private readonly HttpRequest request;
-
+    {      
         public AnimalsController(HttpRequest request)
             : base(request)
         {
