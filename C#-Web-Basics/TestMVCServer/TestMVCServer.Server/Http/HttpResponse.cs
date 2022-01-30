@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Net;
 using System.Text;
 using TestMVCServer.Server.Common;
 
@@ -23,6 +23,13 @@ namespace TestMVCServer.Server.Http
             = new Dictionary<string, HttpCookie>();
 
         public string Content { get; protected set; }
+
+        public static HttpResponse ForError(string message)
+            => new HttpResponse(HttpStatusCode.InternalServerError)
+            {
+                Content = message
+                
+            };
 
         public void AddHeader(string name, string value) 
         {

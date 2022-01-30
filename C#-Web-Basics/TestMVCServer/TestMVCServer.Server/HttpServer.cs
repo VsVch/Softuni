@@ -35,7 +35,7 @@
         { }
 
         public async Task Start()
-        {         
+        {
 
             this.listener.Start();
 
@@ -45,30 +45,50 @@
             while (true)
             {
                 var connection = await listener.AcceptTcpClientAsync();
-                
-                var networkStream = connection.GetStream();             
-                               
+
+                var networkStream = connection.GetStream();
+
                 var requestText = await ReadRequest(networkStream, connection);
-                                
-                var request = HttpRequest.Parse(requestText);
+                try
+                {
+                    var request = HttpRequest.Parse(requestText);
 
-                var response = this.routingTable.ExecuteRequest(request);
+                    var response = this.routingTable.ExecuteRequest(request);
 
-                await WriteResponse(networkStream, response);
+                    this.PrepareSession(request, response);
+
+                    this.LogPipeLine(request, response);
+
+                    await WriteResponse(networkStream, response);
+                }
+                catch (Exception exeption)
+                {
+                    await HandleError(networkStream, exeption);
+                }
 
                 connection.Close();
             }
         }
 
+
         private async Task WriteResponse(
-            NetworkStream networkStream, HttpResponse response) 
+            NetworkStream networkStream, HttpResponse response)
         {
             var responseBytes = Encoding.UTF8.GetBytes(response.ToString());
             await networkStream.WriteAsync(responseBytes);
         }
 
-        private async Task<string> ReadRequest(NetworkStream networkStream,TcpClient connection) 
-        {           
+        private async Task HandleError(NetworkStream networkStream, Exception exeption)
+        {
+            var errorMesage = $"{exeption.Message}{Environment.NewLine}{exeption.StackTrace}";
+
+            var errorResponse = HttpResponse.ForError(errorMesage);
+
+            await WriteResponse(networkStream, errorResponse);
+        }
+
+        private async Task<string> ReadRequest(NetworkStream networkStream, TcpClient connection)
+        {
 
             var bufferLength = 1024;
             var buffer = new byte[bufferLength];
@@ -95,5 +115,30 @@
             return requestBuilder.ToString();
         }
 
+        private void PrepareSession(HttpRequest request, HttpResponse response)
+            => response.AddCookie(HttpSession.SessionCookieName, request.Session.Id);
+
+        private void LogPipeLine(HttpRequest request, HttpResponse response)
+        {
+            var sb = new StringBuilder();
+
+            var separator = new string('-', 50);
+
+            sb.AppendLine();
+            sb.AppendLine(separator);
+
+            sb.AppendLine("REQUEST");
+            sb.AppendLine(request.ToString());
+
+            sb.AppendLine();
+
+            sb.AppendLine("RESPONSE");
+            sb.AppendLine(response.ToString());
+
+            sb.AppendLine();
+
+            Console.WriteLine(sb.ToString());
+
+        }
     }
 }

@@ -27,5 +27,21 @@ namespace TestMVCServer.Controllers
 
             return Text("Cookies set!");
         }
+
+        public HttpResponse ActionWhitSession()
+        {
+            var currendtDateKey = "CurrentDate";
+
+            if (this.Request.Session.ContainsKey(currendtDateKey))
+            {
+                var currentdate = this.Request.Session[currendtDateKey];
+
+                return Text($"Stored date: {currentdate}");
+            }
+
+            this.Request.Session[currendtDateKey] = DateTime.UtcNow.ToString();
+
+            return Text("Current date stored!");
+        }
     }
 }
