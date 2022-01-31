@@ -1,5 +1,4 @@
 ﻿namespace TestMVCServer.Server
-
 {
     using System.Net;
     using System.Text;
@@ -46,27 +45,31 @@
             {
                 var connection = await listener.AcceptTcpClientAsync();
 
-                var networkStream = connection.GetStream();
-
-                var requestText = await ReadRequest(networkStream, connection);
-                try
+                _ = Task.Run(async () =>
                 {
-                    var request = HttpRequest.Parse(requestText);
+                    var networkStream = connection.GetStream();
 
-                    var response = this.routingTable.ExecuteRequest(request);
+                    var requestText = await ReadRequest(networkStream, connection);
 
-                    this.PrepareSession(request, response);
+                    try
+                    {
+                        var request = HttpRequest.Parse(requestText);
 
-                    this.LogPipeLine(request, response);
+                        var response = this.routingTable.ExecuteRequest(request);
 
-                    await WriteResponse(networkStream, response);
-                }
-                catch (Exception exeption)
-                {
-                    await HandleError(networkStream, exeption);
-                }
+                        this.PrepareSession(request, response);
 
-                connection.Close();
+                        this.LogPipeLine(requestText, response.ToString());
+
+                        await WriteResponse(networkStream, response);
+                    }
+                    catch (Exception exeption)
+                    {
+                        await HandleError(networkStream, exeption);
+                    }
+
+                    connection.Close();
+                });
             }
         }
 
@@ -116,9 +119,12 @@
         }
 
         private void PrepareSession(HttpRequest request, HttpResponse response)
-            => response.AddCookie(HttpSession.SessionCookieName, request.Session.Id);
+        {
+            response.AddCookie(HttpSession.SessionCookieName, request.Session.Id);
+            request.Session.IsNew = false;
+        }
 
-        private void LogPipeLine(HttpRequest request, HttpResponse response)
+        private void LogPipeLine(string request, string response)
         {
             var sb = new StringBuilder();
 
@@ -128,12 +134,12 @@
             sb.AppendLine(separator);
 
             sb.AppendLine("REQUEST");
-            sb.AppendLine(request.ToString());
+            sb.AppendLine(request);
 
             sb.AppendLine();
 
             sb.AppendLine("RESPONSE");
-            sb.AppendLine(response.ToString());
+            sb.AppendLine(response);
 
             sb.AppendLine();
 

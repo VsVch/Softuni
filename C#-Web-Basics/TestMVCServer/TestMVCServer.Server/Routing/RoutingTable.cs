@@ -61,6 +61,23 @@ namespace TestMVCServer.Server.Routing
             var responseFunction = this.routes[requestMethod][reqestPath];
 
             return responseFunction(request);
-        }        
+        }
+
+        public IRoutingTable MapStaticFiles(string folder = "wwwroot")
+        {
+            var currentDirectory = Directory.GetCurrentDirectory();
+            var staticFolder = Path.Combine(currentDirectory, folder);
+            var directoryFiles = Directory.GetFiles(
+                staticFolder,
+                "*.*",
+                SearchOption.AllDirectories);
+
+            foreach (var file in staticFolder)
+            {
+                var relativePath = Path.GetRelativePath(staticFolder, file);
+            }
+
+            return this;
+        }
     }
 }

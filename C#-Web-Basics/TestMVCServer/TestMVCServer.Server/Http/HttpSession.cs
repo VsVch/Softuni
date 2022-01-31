@@ -19,6 +19,8 @@ namespace TestMVCServer.Server.Http
 
         public string Id { get; init; }
 
+        public bool IsNew { get; set; }
+
         public string this[string key]
         {
             get => this.data[key];
@@ -30,5 +32,12 @@ namespace TestMVCServer.Server.Http
         public bool ContainsKey(string key)
             => this.data.ContainsKey(key);       
 
+        public void Remove(string key)
+        {
+            if (this.data.ContainsKey(key))
+            {
+                this.data.Remove(key);
+            }
+        }
     }
 }
