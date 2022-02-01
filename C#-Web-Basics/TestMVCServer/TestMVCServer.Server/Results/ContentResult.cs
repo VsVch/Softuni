@@ -9,7 +9,7 @@ namespace TestMVCServer.Server.Results
             string content,
             string contentType)
             : base(response)
-        => PrepareContent(content, contentType);                     
+        => SetContent(content, contentType);                     
                 
     }
 }

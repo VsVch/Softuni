@@ -12,9 +12,9 @@ namespace TestMVCServer.Controllers
 
         public HttpResponse Index() => Text("Hello from Sand!");
 
-        public HttpResponse LocalRedirect() => Redirect("/Cats");
+        public HttpResponse LocalRedirect() => Redirect("/Animals/Cats");
 
-        public HttpResponse StaticFiles() => Redirect("/Cats");
+        public HttpResponse StaticFiles() => View();
 
         public HttpResponse ToSoftUni() => Redirect("https://softuni.bg");
 

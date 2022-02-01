@@ -37,7 +37,7 @@ namespace TestMVCServer.Server.Results
                 viewContent = this.PopulateModel(viewContent, model);
             }
 
-            this.PrepareContent(viewContent, HttpContentType.Html);
+            this.SetContent(viewContent, HttpContentType.Html);
            
         }
 
@@ -47,7 +47,7 @@ namespace TestMVCServer.Server.Results
 
             var errorMessaage = $"View '{viewPath}' was not found.";
 
-            this.PrepareContent(errorMessaage, HttpContentType.PlainText);
+            this.SetContent(errorMessaage, HttpContentType.PlainText);
         }
 
         private string PopulateModel(string viewContent, object model) 

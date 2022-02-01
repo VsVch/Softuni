@@ -124,14 +124,16 @@
                     .Value
                     .Split(';');
 
-                foreach (var cookie in allCookies)
+                foreach (var cookieText in allCookies)
                 {
-                    var cookiePart = cookie.Split('=');
+                    var cookiePart = cookieText.Split('=');
 
                     var cookieName = cookiePart[0].Trim();
                     var cookieValue = cookiePart[1].Trim();
 
-                    cookieCollection.Add(cookieName, new HttpCookie(cookieName, cookieValue));
+                    var cookie = new HttpCookie(cookieName, cookieValue);
+
+                    cookieCollection[cookieName] = cookie;
                 }
             }
 
