@@ -9,8 +9,8 @@ namespace TestMVCServer.Server.Controller
     {
         public const string UserSessionKey = "AuthenticatedUserId";
 
-        private UserIdentity userIdentity;
-               
+
+        private UserIdentity userIdentity;               
 
         protected HttpRequest Request { get; init; }
 

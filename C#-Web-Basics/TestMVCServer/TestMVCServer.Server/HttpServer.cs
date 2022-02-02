@@ -126,8 +126,11 @@
 
         private void PrepareSession(HttpRequest request, HttpResponse response)
         {
-            response.AddCookie(HttpSession.SessionCookieName, request.Session.Id);
-            request.Session.IsNew = false;
+            if (request.Session.IsNew)
+            {
+                response.AddCookie(HttpSession.SessionCookieName, request.Session.Id);
+                request.Session.IsNew = false;
+            }            
         }
 
         private void LogPipeLine(string request, string response)
