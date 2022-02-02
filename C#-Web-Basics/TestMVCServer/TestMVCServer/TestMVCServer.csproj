@@ -23,10 +23,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Views\Animals\Layout.cshtml" />
 	  <None Remove="Views\Animals\Wild\Bunnies.cshtml" />
 	  <None Remove="Views\Animals\Wild\Cats.cshtml" />
 	  <None Remove="Views\Animals\Wild\Turtles.cshtml" />
 	  <None Remove="Views\Cats\Create.cshtml" />
+	  <None Remove="Views\Dogs\Create.cshtml" />
 	  <None Remove="Views\Home\StaticFiles.cshtml" />
 	  <None Remove="wwwroot\img\cat.jpg" />
 	</ItemGroup>

@@ -9,9 +9,9 @@ namespace TestMVCServer
         public static async Task Main()
             => await new HttpServer(routes => routes
               .MapStaticFiles()
-              .MapControllers()
+              .MapControllers())
               ////.MapGet<HomeController>("/", c => c.Index())
-              .MapGet<HomeController>("/ToCats", c => c.LocalRedirect())
+              //.MapGet<HomeController>("/ToCats", c => c.LocalRedirect())
               //.MapGet<HomeController>("/Softuni", c => c.ToSoftUni())
               //.MapGet<HomeController>("/StaticFiles", c => c.StaticFiles())
               //.MapGet<HomeController>("/Error", c => c.Error())
@@ -25,7 +25,7 @@ namespace TestMVCServer
               //.MapGet<AccountController>("/Login", c => c.Login())
               //.MapGet<AccountController>("/Authenticated", c => c.AuthenticatedCheck())
               //.MapGet<CatsController>("/Cats/Create", c => c.Create())
-              .MapPost<CatsController>("/Cats/Save", c => c.Save()))              
+              //.MapPost<CatsController>("/Cats/Save", c => c.Save()))              
             .Start();
     }
 }

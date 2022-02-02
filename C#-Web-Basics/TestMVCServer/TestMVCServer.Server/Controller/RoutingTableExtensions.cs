@@ -1,12 +1,14 @@
 ﻿using System.Reflection;
 using TestMVCServer.Server.Http;
 using TestMVCServer.Server.Routing;
+using HttpMethod = TestMVCServer.Server.Http.HttpMethod;
 
 namespace TestMVCServer.Server.Controller
 {
     public static class RoutingTableExtensions
     {
         private static Type httpResponseType = typeof(HttpResponse);
+        private static Type stringType = typeof(string);
 
         public static IRoutingTable MapGet<TController>(
             this IRoutingTable routingTable,
@@ -25,6 +27,20 @@ namespace TestMVCServer.Server.Controller
             => routingTable.MapPost(path, request => controllerFunction(
               CreateController<TController>(request)));
 
+        private static object CreateController(Type controllerType, HttpRequest request)
+        {
+            var controller = (Controller) Activator.CreateInstance(controllerType);
+
+            controllerType
+                .GetProperty("Request", BindingFlags.Instance | BindingFlags.NonPublic)
+                .SetValue(controller, request);
+
+            return controller;
+        } 
+
+        private static TController CreateController<TController>(HttpRequest request)
+        => (TController)Activator.CreateInstance(typeof(TController), request);
+
         public static IRoutingTable MapControllers(this IRoutingTable routingTable)
         {
             var controllerActions = GetControllerActions();
@@ -37,10 +53,25 @@ namespace TestMVCServer.Server.Controller
                 var path = $"/{controlerName}/{actionName}";
 
                 var responseFunction = GetResponseFunction(controllerAction);
-                 
-                routingTable.MapGet(path, responseFunction);
 
-                MapDefaultRoutes(routingTable, actionName, controlerName, responseFunction);
+                var httpMethod = HttpMethod.Get;
+
+                var httpMethodAttribute = controllerAction
+                    .GetCustomAttribute<HttpMethodAttribute>();
+
+                if (httpMethodAttribute != null)
+                {
+                    httpMethod = httpMethodAttribute.HttpMethod;
+                }
+
+                routingTable.Map(httpMethod, path, responseFunction);
+
+                MapDefaultRoutes(
+                    routingTable,
+                    httpMethod,
+                    actionName,
+                    controlerName,
+                    responseFunction);
             }
 
             return routingTable;
@@ -61,13 +92,22 @@ namespace TestMVCServer.Server.Controller
         private static Func<HttpRequest, HttpResponse> GetResponseFunction( MethodInfo controllerAction) 
             => request =>
             {
+                if (!UserIsAuthorized(controllerAction, request.Session))
+                {
+                   return new HttpResponse(HttpStatusCode.Unauthorized);
+                }
+
                 var controllerInstance = CreateController(controllerAction.DeclaringType, request);
-                                
-                return (HttpResponse)controllerAction.Invoke(controllerInstance, Array.Empty<object>());
+
+                var parameterValues = GetParameterValues(controllerAction, request);
+
+                return (HttpResponse)controllerAction.Invoke(controllerInstance, parameterValues);
             };
+               
 
         private static void MapDefaultRoutes(
           IRoutingTable routingTable,
+          HttpMethod httpMethod,
           string actionName,
           string controllerName,
           Func<HttpRequest, HttpResponse> responseFunction)
@@ -81,15 +121,86 @@ namespace TestMVCServer.Server.Controller
 
                 if (controllerName == defautControllerName)
                 {
-                    routingTable.MapGet("/", responseFunction);
+                    routingTable.Map(httpMethod, "/", responseFunction);
                 }
             }
         }
 
-        private static object CreateController(Type controller,HttpRequest request)
-        => Activator.CreateInstance(controller, new[] { request });
+        private static bool UserIsAuthorized(
+            MethodInfo controllerAction,
+            HttpSession session) 
+        {
+            var authorization = controllerAction
+                .DeclaringType
+                .GetCustomAttribute<AuthorizeAttribute>()
+                ?? controllerAction
+                .GetCustomAttribute<AuthorizeAttribute>();
 
-        private static TController CreateController<TController>(HttpRequest request)
-        => (TController)Activator.CreateInstance(typeof(TController), request);
+            if (authorization != null)
+            {
+                var userisAuthorized = session.ContainsKey(Controller.UserSessionKey)
+                && session[Controller.UserSessionKey] != null;
+
+                if (!userisAuthorized)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private static object[] GetParameterValues(
+            MethodInfo controllerAction,
+            HttpRequest request)
+        {
+            var actionParameters = controllerAction
+                   .GetParameters()
+                   .Select(p => new
+                   {
+                       p.Name,
+                       Type = p.ParameterType
+                   })
+                   .ToArray();
+
+            var parameterValues = new object[actionParameters.Length];
+
+            for (int i = 0; i < actionParameters.Length; i++)
+            {
+                var parameter = actionParameters[i];
+                var parameterName = parameter.Name;
+                var parameterType = parameter.Type;
+
+                if (parameterType.IsPrimitive || parameterType == stringType)
+                {
+                    var parameterValue = request.GetValue(parameterName);
+
+                    parameterValues[i] = Convert.ChangeType(parameterValue, parameterType);
+
+                }
+                else
+                {
+                    var parameterValue = Activator.CreateInstance(parameterType);
+
+                    var parameterProperties = parameterType.GetProperties();
+
+                    foreach (var property in parameterProperties)
+                    {
+                        var propertyValue = request.GetValue(property.Name);
+
+                        property.SetValue(parameterValue,Convert.ChangeType(propertyValue, property.PropertyType));
+                    }
+
+                    parameterValues[i] = parameterValue;
+                }                
+            }
+
+            return parameterValues;
+        }
+
+      private static string GetValue(this HttpRequest request, string name)
+            => request.Query.GetValueOrDefault(name)
+                    ?? request.Form.GetValueOrDefault(name);
+              
     }
 }

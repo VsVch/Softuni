@@ -6,11 +6,7 @@ namespace TestMVCServer.Controllers
 {
     public class AccountController : Controller
     {
-        public AccountController(HttpRequest request)
-            : base(request)
-        {
-        }
-
+       
         public HttpResponse Login() 
         {
             var someUserid = "MyUserId";
@@ -26,7 +22,7 @@ namespace TestMVCServer.Controllers
             return Text("User signed out!");
         }
 
-        public HttpResponse AuthenticatedCheck()
+        public HttpResponse AuthenticationCheck()
         {
             if (this.User.IsAuthenticated)
             {
@@ -34,6 +30,12 @@ namespace TestMVCServer.Controllers
             }
 
             return Text($"User is not authenticated");
+        }
+        
+        [Authorize]
+        public HttpResponse AuthorizationCheck()
+        {
+            return Text($"Current user: {this.User.Id}");
         }
 
         public  HttpResponse CookiesCheck()
