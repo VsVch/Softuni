@@ -5,6 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Http\Collections\Error.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Http\Collections\Error.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.10.0" />
   </ItemGroup>
 

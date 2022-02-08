@@ -1,6 +1,4 @@
-﻿
-
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
 
 namespace CarShop.Servises
@@ -9,6 +7,11 @@ namespace CarShop.Servises
     {
         public string HasPasword(string password)
         {
+            if (string.IsNullOrWhiteSpace(password))
+            {
+               return string.Empty;
+            }
+
             using (SHA256 sha256Hash = SHA256.Create())
             {
                 // ComputeHash - returns byte array  

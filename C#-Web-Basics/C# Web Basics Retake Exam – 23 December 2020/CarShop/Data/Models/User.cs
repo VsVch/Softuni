@@ -16,8 +16,7 @@ namespace CarShop.Data.Models
         [Required]
         public string Email { get; set; }
 
-        [Required]
-        [MaxLength(UserMaxLenght)]
+        [Required]       
         public string Password { get; set; }
 
         public bool IsMechanic { get; set; }

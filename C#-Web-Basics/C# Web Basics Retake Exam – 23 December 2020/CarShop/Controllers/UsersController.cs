@@ -26,7 +26,7 @@ namespace CarShop.Controllers
 
         public HttpResponse Register()
         {
-            return this.View();
+            return View();
         }
 
         [HttpPost]
@@ -34,15 +34,25 @@ namespace CarShop.Controllers
         {
             var result = validator.RegisterValidator(model);
 
+            if (this.data.Users.Any(u => u.Username == model.Username))
+            {
+                result.Add($"User whit '{model.Username}' already exsist.");
+            }
+
+            if (this.data.Users.Any(u => u.Email == model.Email))
+            {
+                result.Add($"User whit '{model.Email}' already exsist.");
+            }
+
             if (result.Any())
             {
                 return Error(result);
-            }         
+            }
 
             var user = new User
             {
                 Username = model.Username,
-                Password = model.Password,
+                Password =this.passwordHasher.HasPasword(model.Password),
                 Email = model.Email,
                 IsMechanic = model.UserType == Constants.UserTypeMechanic
             };
@@ -51,12 +61,41 @@ namespace CarShop.Controllers
 
             data.SaveChanges();
 
-            return this.Redirect("/Users/login");
+            return Redirect("/Users/login");
         }
 
         public HttpResponse Login()
         {
-            return this.View();
+            return View();
+        }
+
+        [HttpPost]
+        public HttpResponse Login(LoginFormModel model)
+        {
+
+            var hashedPassword = this.passwordHasher.HasPasword(model.Password);
+
+            var userId = this.data
+                .Users
+                .Where(u =>u.Username == model.Username && u.Password == hashedPassword)
+                .Select(u => u.Id)
+                .FirstOrDefault();
+            
+            if (userId == null)
+            {
+                return Error($"Invalid username '{model.Username}' or password.");
+            }
+
+            this.SignIn(userId);
+
+            return Redirect("/Cars/All");
+        }
+
+        public HttpResponse Logout()
+        {
+            this.SignOut();
+
+            return Redirect("/");
         }
     }
 }
