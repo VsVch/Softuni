@@ -23,22 +23,22 @@ namespace CarShop.Servises
 
             if (model.Email == null || !Regex.IsMatch(model.Email, UserEmailVaidation))
             {
-                errors.Add($"Email '{model.Username}' is not valid e-mail address.");
+                errors.Add($"Email '{model.Email}' is not valid e-mail address.");
             }
 
             if (model.Password == null || model.Password.Length < UserPasswordMinLenght || model.Password.Length > UserMaxLenght)
             {
-                errors.Add($"Password '{model.Password}' is not valid. It must be betwen {UserPasswordMinLenght} and {UserMaxLenght} symbols.");
+                errors.Add($"Password is not valid. It must be betwen {UserPasswordMinLenght} and {UserMaxLenght} symbols.");
             }
 
             if (model.Password == null || model.Password.Any(x => x == ' '))
             {
-                errors.Add($"Password '{model.Password}' can not contain whitespaces");
+                errors.Add($"Password can not contain whitespaces.");
             }
 
             if (model.UserType == null || model.UserType != UserTypeMechanic && model.UserType != UserTypeClient)
             {
-                errors.Add($"User type '{model.UserType}' is not a valid type");
+                errors.Add($"User type '{model.UserType}' is not a valid type.");
             }
 
             if (model.Password != model.ConfirmPassword)

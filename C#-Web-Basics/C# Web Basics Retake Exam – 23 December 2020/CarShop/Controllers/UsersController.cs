@@ -36,12 +36,12 @@ namespace CarShop.Controllers
 
             if (this.data.Users.Any(u => u.Username == model.Username))
             {
-                result.Add($"User whit '{model.Username}' already exsist.");
+                result.Add($"User whit '{model.Username}' user name already exsist.");
             }
 
             if (this.data.Users.Any(u => u.Email == model.Email))
             {
-                result.Add($"User whit '{model.Email}' already exsist.");
+                result.Add($"User whit '{model.Email}' e-mail already exsist.");
             }
 
             if (result.Any())
@@ -52,7 +52,7 @@ namespace CarShop.Controllers
             var user = new User
             {
                 Username = model.Username,
-                Password =this.passwordHasher.HasPasword(model.Password),
+                Password = this.passwordHasher.HasPasword(model.Password),
                 Email = model.Email,
                 IsMechanic = model.UserType == Constants.UserTypeMechanic
             };
