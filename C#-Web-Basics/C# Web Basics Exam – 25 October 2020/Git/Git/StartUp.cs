@@ -20,7 +20,8 @@
                 .Add<IViewEngine, CompilationViewEngine>()
                 .Add<IUsersService, UserService>()
                 .Add<IPasswordHasher, PasswordHasher>()
-                .Add<IRepositoriesService, RepositoriesService>())
+                .Add<IRepositoriesService, RepositoriesService>()
+                .Add<ICommitsService, CommitsService>())
                 .WithConfiguration<ApplicationDbContext>(context => context
                     .Database.Migrate())
                 .Start();

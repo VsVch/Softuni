@@ -17,5 +17,7 @@ namespace Git.Data
         public const int RepositoryMinLenght = 3;
         public const string RepositoryPublicStatus = "Public";
         public const string RepositoryPrivateStatus = "Private";
+
+        public const int CommentDescriptionMinLenght = 5;
     }
 }

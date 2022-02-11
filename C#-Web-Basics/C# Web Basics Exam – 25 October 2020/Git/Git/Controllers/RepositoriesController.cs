@@ -21,9 +21,24 @@ namespace Git.Controllers
             this.data = data;
             this.service = service;
         }
+        
+        public HttpResponse All()
+        {          
+            var repos = this.data
+                .Repositories
+                .Where(r => r.IsPublic == true)
+                .Select(r => new AllReposotoriesModel
+                {
+                    Id = r.Id,
+                    Name = r.Name,
+                    CreatedOn = r.CreatedOn,
+                    Owner = this.data.Users.Where(u => u.Id == r.OwnerId).Select(u => u.Username).FirstOrDefault(),
+                    CommitsCount = r.Commits.Count(),
+                })
+                .ToList();
 
-        [Authorize]
-        public HttpResponse All() => View();
+            return View(repos);
+        }
 
         [Authorize]
         public HttpResponse Create() => View();

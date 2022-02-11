@@ -19,19 +19,29 @@
                                 <th scope="col">Owner</th>
                                 <th scope="col">Created On</th>
                                 <th scope="col">Commits Count</th>
-                                <th scope="col">Commit</th>
+                                @if(User != null)
+                                {
+                                     <th scope="col">Commit</th>
+                                }                               
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="table-light">
-                                <th scope="row">ASP.NET Core Template</th>
-                                <td>Nikolay Kostov</td>
-                                <td>22/10/2018 08:00</td>
-                                <td>254</td>
-                                <td>
-                                    <a class="btn btn-block btn-primary text-white mb-3" href="/Commits/Create?id=123">Commit</a>
-                                </td>
-                            </tr>
+                            @foreach (var model in Model)
+                            {
+                                 <tr class="table-light">
+                              
+                                    <th scope="row">@model.Name</th>
+                                    <td>@model.Owner</td>
+                                    <td>@model.CreatedOn</td>
+                                    <td>@model.CommitsCount</td>
+                                    @if(User != null)
+                                    {
+                                       <td>
+                                           <a class="btn btn-block btn-primary text-white mb-3" href="/Commits/Create?id=@model.Id">Commit</a>
+                                       </td>
+                                    }                                    
+                                 </tr>
+                            }
                         </tbody>
                     </table>
                 </div>
