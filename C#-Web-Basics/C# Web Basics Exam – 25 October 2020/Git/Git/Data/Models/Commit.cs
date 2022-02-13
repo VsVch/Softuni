@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Git.Data.Models
 {
     public class Commit
     {
-        public Commit()
-        {           
-        }
-
         [Key]
         [Required]
         public string Id { get; set; } = Guid.NewGuid().ToString();
@@ -30,12 +25,3 @@ namespace Git.Data.Models
 
     }
 }
-
-//Commit
-//•	Has an Id – a string, Primary Key
-//•	Has a Description – a string with min length 5 (required)
-//•	Has a CreatedOn – a datetime (required)
-//•	Has a CreatorId – a string
-//•	Has Creator – a User object
-//•	Has RepositoryId – a string
-//•	Has Repository– a Repository object

@@ -25,7 +25,11 @@
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            modelBuilder.Entity<Repository>()
+                .HasOne(u => u.Owner)
+                .WithMany(o => o.Repositories)
+                .HasForeignKey(r => r.OwnerId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

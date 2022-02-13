@@ -17,8 +17,3 @@ namespace Git.Services.Models
         public string ConfirmPassword { get; set; }
     }
 }
-
-//username: client
-//email: sandoki @abv.bg
-//password: 123456
-//confirmPassword: 123456

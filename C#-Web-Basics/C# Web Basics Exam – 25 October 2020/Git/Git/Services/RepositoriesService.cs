@@ -9,7 +9,6 @@ namespace Git.Services
     {
         public ICollection<string> ValidateRepositoriesPropertyes(CreateFormModel model)
         {
-
             var errors = new List<string>();
 
             if (model.Name == null ||

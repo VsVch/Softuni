@@ -5,6 +5,6 @@ namespace Git.Services
 {
     public interface ICommitsService
     {
-        ICollection<string> ValidateCommitsPropertyes(CommitCreateFormModel model);
+        ICollection<string> ValidateCommitsPropertyes(CreateCommitFormModel model);
     }
 }

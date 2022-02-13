@@ -32,7 +32,7 @@ namespace Git.Services
 
             if (model.Email == null || !Regex.IsMatch(model.Email, UsernameEmailValidator))
             {
-                errors.Add($"'{model.Email}' is not valid format for e-mails.");
+                errors.Add($"'{model.Email}' is not valid format e-mail.");
             }
 
             if (model.Password == null ||
@@ -40,6 +40,11 @@ namespace Git.Services
                 model.Password.Length > DefaultMaxLenght)
             {
                 errors.Add($"User name '{model.Password}' is not valid. It must be between {PasswordMinLenght} and {DefaultMaxLenght}.");
+            }
+
+            if (model.Password.Any(x => x == ' '))
+            {
+                errors.Add($"The provided password cannot contains whitespaces.");
             }
 
             if (model.Password != model.ConfirmPassword)
@@ -52,11 +57,11 @@ namespace Git.Services
 
         public string GetUserId(UserLoginFormModel model)
         {
-            var hashedPassword = hasher.HasPasword(model.Password);
+            var hashedPassword = hasher.HashPasword(model.Password);
 
             var user = this.data.Users.FirstOrDefault(x => x.Username == model.Username && x.Password == hashedPassword);
 
-            return user.Id;
+            return user != null ? user.Id : null;
         }       
 
         public bool IsEmailAvailable(string email)
@@ -67,8 +72,6 @@ namespace Git.Services
         public bool IsUsernameAvailable(string username)
         {
            return this.data.Users.Any(u => u.Username == username);
-        }
-
-       
+        }       
     }
 }

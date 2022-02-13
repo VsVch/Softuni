@@ -32,9 +32,4 @@ namespace Git.Data.Models
         public IEnumerable<Commit> Commits { get; set; }
     }
 }
-//•	Has an Id – a string, Primary Key
-//•	Has a Username – a string with min length 5 and max length 20 (required)
-//•	Has an Email - a string (required)
-//•	Has a Password – a string with min length 6 and max length 20  - hashed in the database (required)
-//•	Has Repositories collection – a Repository type
-//•	Has Commits collection – a Commit type
+

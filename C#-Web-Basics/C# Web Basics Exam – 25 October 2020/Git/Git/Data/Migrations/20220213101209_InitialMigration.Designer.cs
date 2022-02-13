@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Git.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220210204155_InitialMigration")]
+    [Migration("20220213101209_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -71,12 +71,14 @@ namespace Git.Data.Migrations
                         .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("OwnerId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("OwnerId");
 
                     b.HasIndex("UserId");
 
@@ -122,9 +124,16 @@ namespace Git.Data.Migrations
 
             modelBuilder.Entity("Git.Data.Models.Repository", b =>
                 {
-                    b.HasOne("Git.Data.Models.User", "User")
+                    b.HasOne("Git.Data.Models.User", "Owner")
                         .WithMany("Repositories")
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Git.Data.Models.User", "User")
+                        .WithMany()
                         .HasForeignKey("UserId");
+
+                    b.Navigation("Owner");
 
                     b.Navigation("User");
                 });

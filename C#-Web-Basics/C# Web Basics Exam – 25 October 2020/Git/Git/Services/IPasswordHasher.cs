@@ -8,6 +8,6 @@ namespace Git.Services
 {
     public interface IPasswordHasher
     {
-        string HasPasword(string password);
+        string HashPasword(string password);
     }
 }

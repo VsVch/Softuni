@@ -31,12 +31,18 @@ namespace Git.Data.Migrations
                     Name = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsPublic = table.Column<bool>(type: "bit", nullable: false),
-                    OwnerId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OwnerId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Repositories", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Repositories_Users_OwnerId",
+                        column: x => x.OwnerId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Repositories_Users_UserId",
                         column: x => x.UserId,
@@ -79,6 +85,11 @@ namespace Git.Data.Migrations
                 name: "IX_Commits_UserId",
                 table: "Commits",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Repositories_OwnerId",
+                table: "Repositories",
+                column: "OwnerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Repositories_UserId",

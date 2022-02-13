@@ -5,7 +5,7 @@ namespace Git.Services
 {
     public class PasswordHasher : IPasswordHasher
     {
-        public string HasPasword(string password)
+        public string HashPasword(string password)
         {
             if (string.IsNullOrWhiteSpace(password))
             {

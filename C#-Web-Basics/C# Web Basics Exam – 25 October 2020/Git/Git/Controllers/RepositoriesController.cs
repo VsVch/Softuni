@@ -23,29 +23,52 @@ namespace Git.Controllers
         }
         
         public HttpResponse All()
-        {          
+        {
+            //var repositoriesQuery = this.data.Repositories.AsQueryable();
+
+            //if (!this.User.IsAuthenticated)
+            //{
+            //    repositoriesQuery = repositoriesQuery.Where(r => r.IsPublic == true);
+            //}
+            //else
+            //{
+            //    repositoriesQuery = repositoriesQuery.Where(
+            //        r => r.IsPublic == true || r.OwnerId == this.User.Id);
+            //}
+
+            //var repos = repositoriesQuery
+            //    .Select(r => new AllReposotoriesModel
+            //    {
+            //        Id = r.Id,
+            //        Name = r.Name,
+            //        CreatedOn = r.CreatedOn,
+            //        Owner = this.data.Users.Where(u => u.Id == r.OwnerId).Select(u => u.Username).FirstOrDefault(),
+            //        CommitsCount = r.Commits.Count(),
+            //    })
+            //    .ToList();
+
             var repos = this.data
                 .Repositories
-                .Where(r => r.IsPublic == true)
+                .Where(x => x.IsPublic == true)
+                .OrderByDescending(r => r.CreatedOn)
                 .Select(r => new AllReposotoriesModel
                 {
                     Id = r.Id,
                     Name = r.Name,
-                    CreatedOn = r.CreatedOn,
-                    Owner = this.data.Users.Where(u => u.Id == r.OwnerId).Select(u => u.Username).FirstOrDefault(),
+                    CreatedOn = r.CreatedOn.ToString("F"),
+                    Owner = r.Owner.Username,
                     CommitsCount = r.Commits.Count(),
                 })
-                .ToList();
+                .ToList();           
 
             return View(repos);
         }
 
         [Authorize]
         public HttpResponse Create() => View();
-
-
-        [Authorize]
+                
         [HttpPost]
+        [Authorize]
         public HttpResponse Create(CreateFormModel model) 
         {
             var errors = service.ValidateRepositoriesPropertyes(model);
@@ -59,15 +82,15 @@ namespace Git.Controllers
             {
                 Name = model.Name,
                 CreatedOn = DateTime.UtcNow,
-                OwnerId = this.User.Id,
-                IsPublic = model.RepositoryType == RepositoryPublicStatus ? true : false,
+                OwnerId = this.User.Id,               
+                IsPublic = model.RepositoryType == RepositoryPublicStatus, 
             };
 
             this.data.Repositories.Add(repository);
 
             this.data.SaveChanges();
 
-            return View("/Repositories/All");
+            return Redirect("/Repositories/All");
         }
     }
 }

@@ -45,7 +45,7 @@ namespace Git.Controllers
             {
                 Username = model.Username,
                 Email = model.Email,
-                Password = hasher.HasPasword(model.Password),
+                Password = hasher.HashPasword(model.Password),
             };
 
             this.data.Users.Add(user);
@@ -64,7 +64,7 @@ namespace Git.Controllers
 
             if (userId == null)
             {
-                return Error($"Invalid username '{model.Username}' or password.");
+                return Error($"Invalid username or password.");
             }
 
             SignIn(userId);

@@ -21,12 +21,12 @@ namespace Git.Controllers
         }
 
         [Authorize]
-        public HttpResponse Create(string id) 
+        public HttpResponse Create(string id)
         {
             var repository = this.data
                 .Repositories
                 .Where(x => x.Id == id)
-                .Select(x => new AddCommitViewModel 
+                .Select(x => new AddCommitViewModel
                 {
                     Id = x.Id,
                     Name = x.Name,
@@ -43,8 +43,8 @@ namespace Git.Controllers
 
         [Authorize]
         [HttpPost]
-        public HttpResponse Create (CommitCreateFormModel model) 
-        { 
+        public HttpResponse Create(CreateCommitFormModel model)
+        {
             var errors = commits.ValidateCommitsPropertyes(model);
 
             if (errors.Any())
@@ -62,6 +62,7 @@ namespace Git.Controllers
                 RepositoryId = model.Id,
                 Description = model.Description,
                 CreatedOn = DateTime.UtcNow,
+                CreatorId = this.User.Id,
             };
 
             this.data.Commits.Add(commit);
@@ -69,6 +70,42 @@ namespace Git.Controllers
             this.data.SaveChanges();
 
             return Redirect("/Repositories/All");
+        }
+
+        [Authorize]
+        public HttpResponse All()
+        {
+            var commits = this.data
+                .Commits
+                .Where(c => c.CreatorId == this.User.Id)
+                .OrderByDescending(c => c.CreatedOn)
+                .Select(c => new CommitListingViewModel
+                {
+                    Id = c.Id,
+                    Description = c.Description,
+                    CreatedOn = c.CreatedOn.ToString("F"),
+                    Repository = c.Repository.Name,
+                })
+                .ToList();
+
+            return View(commits);
+        }
+
+        [Authorize]
+        public HttpResponse Delete(string id)
+        {
+            var commit = this.data.Commits.Find(id);
+
+            if (commit == null || commit.CreatorId != this.User.Id)
+            {
+                return BadRequest();
+            }
+
+            this.data.Commits.Remove(commit);
+
+            this.data.SaveChanges();
+
+            return Redirect("/Commits/All");
         }
     }
 }
