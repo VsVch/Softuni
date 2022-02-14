@@ -52,10 +52,10 @@
 
             var constructors = type.GetConstructors();
 
-            //if (constructors.Length > 1)
-            //{
-            //    throw new InvalidOperationException("Multiple constructors are not supported in the service resolver.");
-            //}
+            if (constructors.Length > 1)
+            {
+                throw new InvalidOperationException("Multiple constructors are not supported in the service resolver.");
+            }
 
             var constructor = constructors.First();
 
