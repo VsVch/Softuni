@@ -80,7 +80,7 @@ namespace FootballManager.Controllers
             
             if (this.data.UsersPlayers.Any(p => p.PlayerId == playerId && p.UserId == user.Id))
             {
-              return Error($"Player '{player.FullName}' is already create from the user");
+              return Error($"Player '{player.FullName}' already exsist in MyCollection.");
             }
 
             if (player == null)
