@@ -1,0 +1,54 @@
+﻿@using ASP.netCoreTreningApp.Service
+@inject IShortStringService shortStringService;
+@inject IConfiguration configuration;
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@{
+    var str = "Test test test test test test test test test test";
+    var shortString = shortStringService.GetShort(str, 20);
+}
+
+@await Html.PartialAsync("_HomePageStart")
+@*@Html.Partial("_HomePageStart")*@
+
+<partial name="_HomePageStart"></>
+
+<div class="text-center">
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <h1>@this.User.Identity.Name</h1>
+    }
+    else
+    {
+        <h1 class="display-4">Welcome @ViewData["Name"]</h1>
+        <h1 class="display-4">Welcome @Html.Raw(ViewData["Name"])</h1>
+        // Use HtmlSanitaizer - nuGet
+        <h2> We are @ViewData["Year"] year.</h2>
+        <p>We have @ViewData["Count"] users.</p>
+        <p>We have @ViewData["Environment"] environment.</p>
+        <p>@this.User.Identity.Name</p>
+        <p>@shortString</p>
+        <p>@DateTime.Now</p>
+        <p>@this.configuration["EmailSettings:ApiKey"]</p>
+        <p>@this.configuration["HelloMassege"]</p>
+        <p>@this.configuration["EmailSettings:Server:Url"]</p>
+    }
+
+    <input type="date" value="dd.MM.yyyy"></>
+
+    <table bootstrap-table="" table-name="My table">
+        @for (var i = 0; i < 5; i++)
+        {
+            <tr>
+                <td>@i</td>
+            </tr>
+        }
+    </table>
+
+</div>
+<div>
+    @ViewBag.Calc()
+</div>
