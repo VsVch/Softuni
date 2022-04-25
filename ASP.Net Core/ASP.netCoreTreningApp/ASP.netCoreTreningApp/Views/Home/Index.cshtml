@@ -1,6 +1,7 @@
 ﻿@using ASP.netCoreTreningApp.Service
 @inject IShortStringService shortStringService;
 @inject IConfiguration configuration;
+@inject IInstanceCounter instanceCounter;
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -23,6 +24,7 @@
     }
     else
     {
+        <h1>Instance count: @instanceCounter.Instance</h1>
         <h1 class="display-4">Welcome @ViewData["Name"]</h1>
         <h1 class="display-4">Welcome @Html.Raw(ViewData["Name"])</h1>
         // Use HtmlSanitaizer - nuGet
@@ -37,7 +39,7 @@
         <p>@this.configuration["EmailSettings:Server:Url"]</p>
     }
 
-    <input type="date" value="dd.MM.yyyy"></>
+    <input type="date" value="dd.MM.yyyy"></h1>
 
     <table bootstrap-table="" table-name="My table">
         @for (var i = 0; i < 5; i++)

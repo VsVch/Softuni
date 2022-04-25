@@ -13,32 +13,40 @@ namespace ASP.netCoreTreningApp.Controllers
         private readonly ApplicationDbContext data;
         private readonly IWebHostEnvironment hostEnvironment;
         private readonly IConfiguration configuration;
+        private readonly IInstanceCounter instanceCounter;
 
         public HomeController(ILogger<HomeController> logger,
             ApplicationDbContext data,
             IWebHostEnvironment hostEnvironment,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            IInstanceCounter instanceCounter)
         {
             _logger = logger;
             this.data = data;
             this.hostEnvironment = hostEnvironment;
             this.configuration = configuration;
+            this.instanceCounter = instanceCounter;
         }
 
         public IActionResult Index()
         {
             var count = this.data.Users.Count();
 
-            var environment = hostEnvironment.EnvironmentName;            
+            var environment = hostEnvironment.EnvironmentName;
 
             this.ViewData["Year"] = 2022;
             this.ViewData["Name"] = "<script>alert('Hacked!!!')</script>";
             this.ViewData["Count"] = count;
             this.ViewData["Environment"] = environment;
-                       
+
             this.ViewBag.UsersCount = count;
             this.ViewBag.Calc = new Func<int>(() => 3);
 
+            return View();
+        }
+
+        public IActionResult StatusCodeError(int errorCode)
+        {
             return View();
         }
 
