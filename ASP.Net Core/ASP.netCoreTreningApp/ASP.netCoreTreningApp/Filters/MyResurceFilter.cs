@@ -6,12 +6,12 @@ namespace ASP.netCoreTreningApp.Filters
     {
         public void OnResultExecuted(ResultExecutedContext context)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void OnResultExecuting(ResultExecutingContext context)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

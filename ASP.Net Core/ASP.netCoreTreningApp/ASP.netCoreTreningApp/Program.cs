@@ -1,5 +1,6 @@
 using ASP.netCoreTreningApp.Data;
 using ASP.netCoreTreningApp.Filters;
+using ASP.netCoreTreningApp.ModelBinders;
 using ASP.netCoreTreningApp.Service;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -30,6 +31,7 @@ builder.Services.AddControllersWithViews(configure =>
     configure.Filters.Add(new MyExeptionFilter());
     configure.Filters.Add(new MyResultFilterAtribute());
     configure.Filters.Add(new MyResurceFilter());
+    configure.ModelBinderProviders.Insert(0, new ExtractYearModelBinderProvider());
 });
 
 var app = builder.Build();
@@ -37,7 +39,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseStatusCodePagesWithRedirects("Home/StatusCodeError?statusCode={0}");
+    //app.UseStatusCodePagesWithRedirects("Home/StatusCodeError?statusCode={0}");
     app.UseMigrationsEndPoint();
     
 }
