@@ -1,4 +1,5 @@
 using ASP.netCoreTreningApp.Data;
+using ASP.netCoreTreningApp.Filters;
 using ASP.netCoreTreningApp.Service;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -22,7 +23,14 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
     options.Password.RequireNonAlphanumeric = false;
 })
 .AddEntityFrameworkStores<ApplicationDbContext>();
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(configure => 
+{
+    configure.Filters.Add(new AddHeaderActionFilter());
+    configure.Filters.Add(new MyAlthFilter());
+    configure.Filters.Add(new MyExeptionFilter());
+    configure.Filters.Add(new MyResultFilterAtribute());
+    configure.Filters.Add(new MyResurceFilter());
+});
 
 var app = builder.Build();
 
