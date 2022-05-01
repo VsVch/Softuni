@@ -28,6 +28,20 @@ namespace ASP.netCoreTreningApp.Controllers
             this.instanceCounter = instanceCounter;
         }
 
+        public IActionResult AjaxDemo()
+        {
+            return this.View();
+        }
+
+        public IActionResult AjaxDemoData()
+        {
+           return this.Json(new[]
+            {
+                new {Name = "Lubo", Data = DateTime.UtcNow.AddDays(2).ToString("O")},
+                new {Name = "Misho", Data = DateTime.UtcNow.AddDays(3).ToString("O")},
+            });            
+        }
+
         public IActionResult Index()
         {
             var count = this.data.Users.Count();

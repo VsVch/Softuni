@@ -1,0 +1,47 @@
+﻿<h1>Hello Ajax!!!</h1>
+
+<table id="DataTable" class="table table-sm table-striped">
+    <tr>
+        <td>
+            Sasho
+        </td>
+        <td>
+            05/06/1982
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Maria
+        </td>
+        <td>
+            27/10/1986
+        </td>
+    </tr>
+</table>
+<button onclick="RefrechData()" class="btn btn-success">
+    Click me !!!
+</button>
+
+@section Scripts{
+<script>
+    function RefrechData(){
+        let xhl = new XMLHttpRequest();
+        xhl.onreadystatechange = function(){
+            if (this.readyState = 4 && this.status == 200){
+                var listOfPeople = JSON.parse(this.responseText);
+                for(var i = 0; i < listOfPeople.length; i++ )
+                {
+                   var person = listOfPeople[i];                 
+
+                   document.getElementById("DataTable").innerHTML +=
+                   "<tr><td>"+person.name+"</td><td>"+person.data+"</td></tr>";
+
+                }
+            }
+        };
+        xhl.open("GET", "/Home/AjaxDemoData");
+        xhl.send();
+    }
+
+</script>
+}
