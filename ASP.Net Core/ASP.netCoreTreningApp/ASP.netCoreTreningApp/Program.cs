@@ -32,7 +32,7 @@ builder.Services.AddControllersWithViews(configure =>
     configure.Filters.Add(new MyResultFilterAtribute());
     configure.Filters.Add(new MyResurceFilter());
     configure.ModelBinderProviders.Insert(0, new ExtractYearModelBinderProvider());
-});
+}).AddXmlSerializerFormatters();
 
 var app = builder.Build();
 
