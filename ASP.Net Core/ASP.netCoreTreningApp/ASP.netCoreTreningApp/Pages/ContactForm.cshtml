@@ -1,0 +1,47 @@
+﻿@page
+@model ASP.netCoreTreningApp.Pages.ContactFormModel
+@{
+}
+
+@if (Model.InfoMessage != null)
+{
+    <div class="alert alert-info">@Model.InfoMessage</div>
+}
+
+
+<h1>Contact Form!!!</h1>
+<form method="post">
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div>
+        <label asp-for="Name"> </label>
+        <input asp-for="Name" class="form-control"></span>
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control"></>
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="Title"></label>
+        <input asp-for="Title" class="form-control"></>
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="Context"></label>
+        <input asp-for="Context" class="form-control"></>
+        <span asp-validation-for="Context" class="text-danger"></span>
+    </div>
+
+    <button class="btn btn-primary">Submit</button>
+</form>
+
+@section Scripts{
+<partial name="_ValidationScriptsPartial"></partial>
+}
+
