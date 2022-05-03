@@ -1,15 +1,12 @@
 using ASP.netCoreTreningApp.Data;
 using ASP.netCoreTreningApp.Filters;
 using ASP.netCoreTreningApp.ModelBinders;
+using ASP.netCoreTreningApp.RouteConstraint;
 using ASP.netCoreTreningApp.Service;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("ApplicationDbContextConnection");;
-
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));;
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();;
@@ -21,6 +18,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddTransient<IShortStringService, ShortStringService>();
 builder.Services.AddTransient<IInstanceCounter, InstanceCounter>();
+
+builder.Services.AddRouting(option =>
+{
+    option.ConstraintMap.Add("cyrillic", typeof(CyrillicRouteConstraint));
+});
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 {
