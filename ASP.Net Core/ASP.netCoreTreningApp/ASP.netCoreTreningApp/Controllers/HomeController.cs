@@ -41,6 +41,12 @@ namespace ASP.netCoreTreningApp.Controllers
                 new {Name = "Misho", Data = DateTime.UtcNow.AddDays(3).ToString("O")},
             });            
         }
+        
+        
+        public IActionResult GetData(string info)
+        {
+            return this.Content(info);
+        }
 
         public IActionResult Index()
         {

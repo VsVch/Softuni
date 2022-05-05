@@ -11,6 +11,11 @@
     var shortString = shortStringService.GetShort(str, 20);
 }
 
+<form method="Post" asp-action="GetData">
+    <input type="text" name="info"></input>
+    <input type="submit" value="Click me."></input>
+</form>
+
 @await Html.PartialAsync("_HomePageStart")
 @*@Html.Partial("_HomePageStart")*@
 

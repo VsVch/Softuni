@@ -4,12 +4,10 @@ using ASP.netCoreTreningApp.ModelBinders;
 using ASP.netCoreTreningApp.RouteConstraint;
 using ASP.netCoreTreningApp.Service;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();;
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -30,11 +28,12 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
     options.Password.RequireDigit = false;
     options.Password.RequireUppercase = false;
     options.Password.RequireLowercase = false;
-    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireNonAlphanumeric = false;   
 })
 .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews(configure => 
 {
+    configure.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
     configure.Filters.Add(new AddHeaderActionFilter());
     configure.Filters.Add(new MyAlthFilter());
     configure.Filters.Add(new MyExeptionFilter());
