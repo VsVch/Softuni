@@ -3,13 +3,23 @@ using ASP.netCoreTreningApp.Filters;
 using ASP.netCoreTreningApp.ModelBinders;
 using ASP.netCoreTreningApp.RouteConstraint;
 using ASP.netCoreTreningApp.Service;
+using ASP.netCoreTreningApp.Settings;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+var jwtSettingsSection = builder.Configuration.GetSection("JwtSettings");
+builder.Services.Configure<JwtSettings>(jwtSettingsSection);
+
+var jwtSettings = jwtSettingsSection.Get<JwtSettings>();
+var key = Encoding.ASCII.GetBytes(jwtSettings.Secret);
+
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
@@ -42,6 +52,27 @@ builder.Services.AddControllersWithViews(configure =>
     configure.ModelBinderProviders.Insert(0, new ExtractYearModelBinderProvider());
 }).AddXmlSerializerFormatters();
 
+builder.Services.AddAuthentication().AddJwtBearer(options =>
+{
+    options.RequireHttpsMetadata = false;
+    options.SaveToken = true;
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(key),
+        ValidateIssuer = false,
+        ValidateAudience = false,
+    };
+});
+
+// Jwt token default authentication schema
+//builder.Services.AddAuthentication(
+//    options =>
+//    {
+//        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+//        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+//    });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -53,7 +84,6 @@ if (app.Environment.IsDevelopment())
 }
 else
 {
-
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
