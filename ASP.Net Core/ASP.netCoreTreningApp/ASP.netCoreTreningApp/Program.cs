@@ -4,7 +4,7 @@ using ASP.netCoreTreningApp.ModelBinders;
 using ASP.netCoreTreningApp.RouteConstraint;
 using ASP.netCoreTreningApp.Service;
 using ASP.netCoreTreningApp.Settings;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
