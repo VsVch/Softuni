@@ -19,6 +19,13 @@ builder.Services.Configure<JwtSettings>(jwtSettingsSection);
 
 builder.Services.AddMemoryCache();
 
+builder.Services.AddDistributedSqlServerCache(option =>
+{
+    option.ConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+    option.SchemaName = "dbo";
+    option.TableName = "CacheRecords";
+});
+
 var jwtSettings = jwtSettingsSection.Get<JwtSettings>();
 var key = Encoding.ASCII.GetBytes(jwtSettings.Secret);
 
