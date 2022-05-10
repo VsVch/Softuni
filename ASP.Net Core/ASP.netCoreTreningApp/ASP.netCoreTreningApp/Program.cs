@@ -36,6 +36,14 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddTransient<IShortStringService, ShortStringService>();
 builder.Services.AddTransient<IInstanceCounter, InstanceCounter>();
 
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = new TimeSpan(365, 0, 0, 0);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.SameSite = Microsoft.AspNetCore.Http.SameSiteMode.Strict;
+    options.Cookie.IsEssential = true;
+});
+
 builder.Services.AddRouting(option =>
 {
     option.ConstraintMap.Add("cyrillic", typeof(CyrillicRouteConstraint));
@@ -101,6 +109,7 @@ else
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+app.UseSession();
 app.UseRouting();
 
 app.UseAuthentication();

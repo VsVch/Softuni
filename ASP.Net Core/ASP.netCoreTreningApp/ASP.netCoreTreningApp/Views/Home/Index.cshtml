@@ -10,6 +10,9 @@
     var str = "Test test test test test test test test test test";
     var shortString = shortStringService.GetShort(str, 20);
 }
+<cache expires-after="TimeSpan.FromSeconds(10)">
+    <h1>@DateTime.UtcNow</h1>
+</cache>
 
 <form method="Post" asp-action="GetData">
     <input type="text" name="info"></input>
@@ -19,7 +22,7 @@
 @await Html.PartialAsync("_HomePageStart")
 @*@Html.Partial("_HomePageStart")*@
 
-<partial name="_HomePageStart"></>
+<partial name="_HomePageStart"></h1>
 
 <div class="text-center">
 

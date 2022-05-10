@@ -33,6 +33,7 @@ namespace ASP.netCoreTreningApp.Controllers
             return this.View();
         }
 
+        [ResponseCache(Duration = 24 * 60 * 60)]
         public IActionResult AjaxDemoData()
         {
            return this.Json(new[]
@@ -41,7 +42,6 @@ namespace ASP.netCoreTreningApp.Controllers
                 new {Name = "Misho", Data = DateTime.UtcNow.AddDays(3).ToString("O")},
             });            
         }
-        
         
         public IActionResult GetData(string info)
         {
@@ -78,6 +78,8 @@ namespace ASP.netCoreTreningApp.Controllers
             model.LastName = "Stef";
             model.Age = 40;
             model.Description = "Test test test test";
+
+            this.HttpContext.Session.SetString("ReadPrivacy", "true");
 
             return View(model);
         }
