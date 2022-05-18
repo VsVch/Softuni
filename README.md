@@ -4,8 +4,8 @@
 <h2>C# Basics</h2>
 <span>In this course I took the first steps in programming. I learned to work with for loops, while loops, nested loops and conditional operators.</span>
 <h2>C# Programming Fundamentals</h2>
-<span>In this course I level up my skills in the C# programming language, tooks my first step in OOP programing, learned to: work with some colections (Array, List, Associative Arrays, Dictionary, nested Dictionary), manipulate string whit regex and other operation like LINQ and loops and inproved my algoritmic thinkings.</span>
+<span>In this course I level up my skills in the C# programming language, tooks my first step in OOP programing, learned to: work with some colections (Array, List, Dictionary, nested Dictionary), manipulate string whit regex and other operation like LINQ and loops and inproved my algoritmic thinkings.</span>
 <h2>C# Programming Advanced</h2>
-<span>In аdvanced programming course I continued to develop my algorithmic thinking.</span>
+<span>In аdvanced programming course I continued to develop my algorithmic thinking and I entered deeper into OOP programming. I learned new type of collection like (Queue, Hashset, Stack, LinkedList, Multidimensional Arrays)</span>
 <h2></h2>
 <span></span>
