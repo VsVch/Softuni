@@ -12,8 +12,10 @@
 <h2>JavaScript Programming Advanced</h2>
 <span>In this course, I saw how it works dynamically type language. I learned how to use different type collections like (Object, Arrays and Nested Arrays ) on dynamic environment, learned how to manipulate DOM tree, to add event listeners and using them.</span>
 <h2>JavaScript Programming Application</h2>
-<span>This course teached me what is that CRUD operations, asynchronous programming, routing system, view in context of single page application.Step by step we builded front end part of SPA application from zero.</span>
+<span>This course teached me what is that CRUD operations, asynchronous programming, routing system, view in context of single page application. Step by step we builded front end part of SPA application from zero.</span>
 <h2>C# Databases Basics</h2>
 <span>Whit two words MSSQL Server. I learned SQL language, how to do Built-in Functions, Subqueries, Joins, Procedures, Triggers, Transactions. I learned what is means relations data base and level of normalizations of data base.</span>
+<h2>C# Databases Advanced</h2>
+<span>In this corse I lerned to use ORM tehnology Entity Framework Core (EF core) and two ways of aproach to build data layer(code first and data base first). In this module we was focus to create relations data base in code first aproach. I expended my knoweg to use LINQ, met auto mapper, ADO.Net tools, learned to use data migrations, data transfer objects, serialize and deserialize data in to HML and JSON formats.</span>
 <h2></h2>
 <span></span>
