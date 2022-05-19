@@ -16,6 +16,6 @@
 <h2>C# Databases Basics</h2>
 <span>Whit two words MSSQL Server. I learned SQL language, how to do Built-in Functions, Subqueries, Joins, Procedures, Triggers, Transactions. I learned what is means relations data base and level of normalizations of data base.</span>
 <h2>C# Databases Advanced</h2>
-<span>In this course I lerned to use ORM tehnology Entity Framework Core (EF core) and two ways of aproach to build data layer(code first and data base first aproach). In this module we was focus to creat diferent relation data bases in every exercise. Mostly we used  code first aproach. I expended my knoweg to use LINQ, met auto mapper and ADO.Net tools, learned to use data migrations, data transfer objects, serialize and deserialize data in to HML and JSON formats. In this course I also met acquainted with non-relational databases like NOSQL data base.</span>
+<span>In this course I lerned to use ORM tehnology Entity Framework Core (EF core) and two ways of aproach to build data layer(code first and data base first aproach). In this module we was focus to creat diferent relation data bases in every exercise. Mostly we used  code first aproach. I expended my knoweg to use LINQ, met auto mapper and ADO.Net tools, learned to use data migrations, data transfer objects, serialize and deserialize data in to HML and JSON formats. In this course I also met  non-relational databases (NOSQL data base).</span>
 <h2></h2>
 <span></span>
