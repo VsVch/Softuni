@@ -21,5 +21,4 @@
 <span>Next step in my education was very hard one - C# Web Basics. In this course we builded basics version on ASP.Net Core framework. We (When i write "we" i mean we like a course with mentor) started whit basic TCP connection with listener, then added HTTP Request - HTTP Response model with routing system, introduced MVC pattern with data binding system for the views. During the course we use OOP prenciples like SOLID, encapsulation, inheritance, interfaces, abstraction, some reflection and options to use attributes when it is necesery (mostly for autentication and data validation). 
 <h2>ASP.Net Core</h2>
 <span>This course introdused me how ASP.Net Core framework works. I learned how to create Razor Views and bainding data in it, how to manipulate request responce pipe line with middleware and filters, how to used Web IP and AJAX, Security, Identity, some usful tool like Signalar and Blazor pages, how to test code with unit, integration and selenium testing and many other things like sessions, cache, GDPR. In the end of the course i build project from zero and defended it.You can se  my project here -> https://github.com/Sand82/BakeryProject .</span>
-<h2></h2>
-<span></span>
+
