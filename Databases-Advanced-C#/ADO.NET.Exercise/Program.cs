@@ -7,7 +7,7 @@ namespace ADO.NET.Exercise
 {
     class Program
     {
-        const string SqlConnectionString = "Server=localhost; User Id=sa;Password=@Stefanov820605; Database=MinionsDB";
+        const string SqlConnectionString = "Server=localhost; User Id=sa;Password=@Test123456; Database=MinionsDB";
         static void Main(string[] args)
         {
             using (var connection = new SqlConnection(SqlConnectionString))
