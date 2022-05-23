@@ -20,7 +20,7 @@ namespace FootballManager.Data
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer
-                    ("Server=localhost; User Id=sa; Password=@Stefanov820605; Database=FootballManager;");
+                    ("Server=localhost; User Id=sa; Password=@Test123456; Database=FootballManager;");
             }
         }
 
