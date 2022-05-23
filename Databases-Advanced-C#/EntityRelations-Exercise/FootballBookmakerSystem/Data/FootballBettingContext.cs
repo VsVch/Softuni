@@ -31,7 +31,7 @@ namespace P03_FootballBetting.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=localhost;User Id=sa;Password=@Stefanov820605;Database=FootballBookmakerSystem");
+                optionsBuilder.UseSqlServer("Server=localhost;User Id=sa;Password=@Test123456;Database=FootballBookmakerSystem");
             }
             base.OnConfiguring(optionsBuilder);
         }
