@@ -11,7 +11,7 @@ namespace FastFood.Data
         public FastFoodContext CreateDbContext(string[] args)
         {
             var builder = new DbContextOptionsBuilder<FastFoodContext>();
-            builder.UseSqlServer("Server=localhost; User Id=sa;Password=@Stefanov820605; Database=FastFood");
+            builder.UseSqlServer("Server=localhost; User Id=sa;Password=@Test123456; Database=FastFood");
            
             return new FastFoodContext(builder.Options);
         }
