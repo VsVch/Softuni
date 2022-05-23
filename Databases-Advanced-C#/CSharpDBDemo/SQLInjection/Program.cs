@@ -13,7 +13,7 @@ namespace SQLInjection
             var pasword = Console.ReadLine();
 
             using (var connection = new SqlConnection
-                ("Server=localhost; User Id=sa;Password=@Stefanov820605; Database=Service")) 
+                ("Server=localhost; User Id=sa;Password=@Test123456; Database=Service")) 
             {
                 var wrongWay = $"SELECT COUNT(*) FROM Users WHERE Username = '{userName}' AND Password = '{pasword}'";
                 var rightWay = $"SELECT COUNT(*) FROM Users WHERE Username = @UserName AND Password = @Password";
