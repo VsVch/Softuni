@@ -22,7 +22,7 @@ namespace EfCodeFirstDemo
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server = localhost; User Id = sa; Password = @Stefanov820605; Database = SliDo");
+                optionsBuilder.UseSqlServer("Server = localhost; User Id = sa; Password = @Test123456; Database = SliDo");
             }
         }
 
