@@ -24,7 +24,7 @@
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(@"Server=localhost; User Id=sa;Password=@Stefanov820605;Database=ProductShop;");                                
+                optionsBuilder.UseSqlServer(@"Server=localhost; User Id=sa;Password=@Test123456;Database=ProductShop;");                                
             }
         }
 
