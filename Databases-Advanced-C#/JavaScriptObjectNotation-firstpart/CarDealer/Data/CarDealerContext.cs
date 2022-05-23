@@ -28,7 +28,7 @@ namespace CarDealer.Data
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer("Server=localhost; User Id=sa;Password=@Stefanov820605; Database=CarDealer;");
-                //Server=localhost; User Id=sa;Password=@Stefanov820605; Database=MinionsDB
+                //Server=localhost; User Id=sa;Password=@Test123456; Database=MinionsDB
             }
         }
 
