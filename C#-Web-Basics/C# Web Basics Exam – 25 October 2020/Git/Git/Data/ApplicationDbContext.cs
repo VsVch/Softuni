@@ -20,7 +20,7 @@
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=localhost; User Id=sa;Password=@Stefanov820605; Database=Git");
+                optionsBuilder.UseSqlServer("Server=localhost; User Id=sa;Password=@Test123456; Database=Git");
             }
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
