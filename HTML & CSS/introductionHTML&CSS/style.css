@@ -1,0 +1,48 @@
+body {
+    background: white;
+    color: green;
+}
+
+h1 {
+    background: rgb(209, 110, 24);
+    color: brown;
+}
+
+h2 {
+    background: yellow;
+    color: darkorange
+}
+
+#first-item {
+    font-style:  italic;
+
+}
+
+#first-item-liOne{
+    list-style:  lower-greek;
+    color: green
+}
+
+.selected-li {
+ color: red;
+}
+
+.color.big {
+    color: black;
+    font-size: 45px
+}
+
+.button {
+    color: white;
+    background: darkblue;
+    border: none;
+    padding: 6px 8px;
+    border-radius: 8px;
+}
+
+button:hover {
+    cursor: pointer;
+    color: darkblue;
+    background: brown;
+
+}
