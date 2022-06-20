@@ -1,0 +1,85 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital@1&family=Montserrat:wght@500&display=swap");
+
+body,
+* {
+  font-family: "Lato";
+  margin: 0;
+}
+
+.modul {
+  box-shadow: 1px 1px 13px -3px rgba(0, 0, 0, 0.75);
+  max-width: 350px;
+  border-radius: 12px;
+  display: inline-block;
+  margin: 30px;
+}
+
+section {
+  margin: 80px auto;  
+}
+
+.modul-description {
+  margin: 25px;
+  font-size: 14px;
+  padding: 15px;
+}
+
+.modul-prices {
+  color: white;
+  padding: 22px 0;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;  
+}
+
+.fundamentals .modul-prices {
+  
+  background: rgb(79, 113, 144);
+  background: linear-gradient(
+    90deg,
+    rgba(79, 113, 144, 1) 0%,
+    rgba(87, 130, 171, 1) 35%,
+    rgba(97, 153, 204, 1) 100%
+  );
+}
+
+.profesional .modul-prices {
+  background: rgb(75, 58, 166);
+  background: linear-gradient(
+    90deg,
+    rgba(75, 58, 166, 1) 0%,
+    rgba(108, 91, 196, 1) 35%,
+    rgba(137, 122, 223, 1) 100%
+  );
+}
+
+.modul-prices h4 {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.modul-title,
+.modul-description {
+  text-align: center;
+}
+
+.modul-title {
+  padding-bottom: 0px;
+  padding-top: 25px;
+  font-family: "Montserrat";
+}
+
+.modul-prices-online,
+.modul-prices-onsite {
+  display: inline-block;
+  padding: 0px 10px;
+  text-align: center;
+}
+
+.modul-prices-online {
+  border-right: 1px solid white;
+}
+
+h2 {
+  margin-top: 50px;
+}
