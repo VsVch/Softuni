@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+body {
+    font-family: 'Open Sans';
+}
+
+section {
+    width: 700px;
+    margin: 100px auto;
+    border: 3px solid black;
+    border-radius: 4px;
+}
+
+.earth-header {
+    background-color: black;     
+}
+
+.earth-header h1 {
+    margin: 0;
+    color: #06EFF5;
+    padding: 20px 10px 5px 10px;
+    font-size: 36px;
+}
+
+.earth-header p {
+    margin: 0;
+    padding: 5px 10px 20px 10px;
+    color: white;
+}
+
+p{
+    letter-spacing: 2px;
+}
+
+.earth-content {
+    padding: 20px;
+}
+
+.earth-content-image, 
+.earth-content-text {
+    display:inline-block;
+    vertical-align: top;
+}
+
+.earth-content-image {
+    width: 35%;
+    margin-right: 30px;
+    border: 1px solid black;
+    padding: 5px 15px;
+}
+
+.earth-content-text {
+    width: 50%;    
+}
+
+.earth-content-text {
+    font-size: 17px;    
+}
+
+.earth-content-image img {
+    width: 100%;
+}
+
+.earth-content-image p {
+    line-height: 16px;
+    font-size: 13px;
+}   
+
+.earth-footer-title {
+    margin: 0; 
+    padding: 5px;
+    background-color: black;
+    color: white;
+    display: inline-block;
+}
+
+.earth-footer-content {
+    background-color: #D9EBEB;
+    padding: 10px;
+    font-size: 17px;         
+}
+
+.earth-footer-content p {
+    margin: 0;   
+}
