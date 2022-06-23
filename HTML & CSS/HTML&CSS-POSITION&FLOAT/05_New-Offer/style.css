@@ -1,0 +1,24 @@
+body {
+    position: relative;
+}
+
+main {
+    position: relative;
+    width: 700px;
+    height: 500px;
+    margin: 60px;
+   
+}
+
+.img.new {
+    position: relative;
+    top:-200px;
+    right: 150px;    
+}
+
+main>img:first-child {
+    position: relative;
+    left:160px;
+    top:200px;
+    z-index:-2;
+}

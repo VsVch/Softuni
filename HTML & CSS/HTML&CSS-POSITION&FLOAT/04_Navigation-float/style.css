@@ -1,0 +1,140 @@
+html {
+    line-height: 1.5;
+}
+
+body {
+    background-color: rgb(238, 238, 238);
+    max-width: 1000px;
+    margin: 100px auto;
+    font-family: Helvetica, sans-serif;
+
+}
+
+/* footer part begine*/
+.site-header {
+    display: inline-block;
+    width: 100%;
+    border-bottom: 4px solid black;
+}
+
+.site-header p { 
+    display: inline-block;
+    
+} 
+
+.site-header-title { 
+    
+    display: inline-block;    
+    font-size: 30px;    
+    margin-bottom:0px ;
+    text-transform: uppercase;
+} 
+
+.site-header nav {
+    margin: 20px 5px 0px 5px;    
+    float: right;  
+}
+
+.site-header nav ul li{
+    display: inline-block;
+    padding: 10px;
+}
+
+.site-header nav ul li a{
+    text-decoration:none;
+    color: #758F66;
+}
+
+.site-header nav ul{
+    margin: 0px;
+}
+
+/* footer part end*/
+
+/* main part one begine */
+
+.side-main-article:first-child {   
+   width: 100%;   
+
+}
+
+.side-main-article-conteiner,
+.side-main-article-aside {
+    display: inline-block; 
+} 
+
+.side-main-article-conteiner {
+    width: 70%; 
+    position: relative;     
+}
+
+.side-main-article-aside {
+    width: 20%;
+    vertical-align: top;
+    margin: 0px 30px;    
+}
+
+.side-main-nav {
+    color: green;
+}
+
+.side-main-article-section-img {
+    float:right;
+    margin-left: 20px;
+    border: 1px solid black; 
+    padding: 5px;   
+}
+
+/* main part one end */
+
+/* main part two begin */
+
+.side-main-article:nth-child(2) {
+    width: 70%;    
+}
+
+.side-main-article-second-article {
+    width: 45%;
+    float: right;    
+    font-family: Georgia, serif;
+    font-style: italic;    
+    border-left: 1px solid gray;
+    padding: 0px 0px 25px 10px;
+    margin: 0px;
+    color: gray;
+}
+
+.side-main-article-second-article>p {
+    margin-top: 0px;    
+}
+
+.side-main-article-second-article p:last-child {
+    float: right;
+    margin-right: 20px;
+}
+
+/* main part two end */
+
+/* main part third begin */
+
+.side-main-article:nth-child(3) {
+    width: 70%;
+     
+}
+
+.side-main-article-third-section img { 
+    width: 30%;
+    float: left;
+    border: 1px solid black; 
+    padding: 5px;
+    margin: 0px 25px 0px 0px;
+}
+
+.image {
+    box-shadow: 1px -1px 18px 3px rgba(0, 0, 0, 0.25);
+    background-color: rgb(255, 255, 255) ;
+}
+
+.heads {
+    font-family: Georgia, serif;
+}
