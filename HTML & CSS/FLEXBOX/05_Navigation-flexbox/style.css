@@ -1,0 +1,44 @@
+body {
+    width: 1000px;
+    margin: 50px auto;
+    font-family: Helvetica, sans-serif;
+} 
+
+.side-header {
+    display: flex;
+    flex-direction: column;  
+    border-bottom: 2px solid rgb(0,0,0);
+    width: 100%;     
+}
+
+.side-header {
+    font-size: 20px;
+    padding: 2px;
+}
+
+.side-header div {
+    display: inline-flex;
+    display: flex;
+    justify-content: space-between;
+}
+
+.side-header-nav {
+    align-self: flex-end;
+    display: flex;        
+}
+
+.side-header-nav-ul {
+    display: flex;
+}
+
+.side-header-nav-ul li  {    
+    list-style-type: none;
+    padding: 15px;
+}
+
+.side-header-nav-ul li a {
+    text-decoration: none;
+    list-style-type: none;
+    color: rgb(0,153,0);
+}
+
