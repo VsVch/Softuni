@@ -1,0 +1,8 @@
+.book-item {
+    font-family:'Times New Roman', serif;
+    font-style: italic;
+}
+
+.author {
+    display: block;
+}
