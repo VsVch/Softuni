@@ -1,12 +1,11 @@
+import * as  UserSectionHelperService  from '../../../services/UserSectionHelperService.js'
+import { UserConstants } from '../UserConstants.js'
+
+
 export const UserTableBody = (props) => {
-
-  const data = new Date(props.createdAt)
-      .toLocaleDateString('en-us', {year:"numeric", month:"short", day:"numeric"});
-
-  console.log(props._id);
-  
+   
   const blankImageUrl = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png';
-
+ 
   return (
     
       <tr>
@@ -22,10 +21,10 @@ export const UserTableBody = (props) => {
         <td>{props.lastName}</td>
         <td>{props.email}</td>
         <td>{props.phoneNumber}</td>
-        <td>{data}</td>
+        <td>{UserSectionHelperService.formatData(props.createdAt)}</td>        
 
         <td className="actions">
-          <button className="btn edit-btn" title="Edit">
+          <button className="btn edit-btn" title="Edit" onClick={()=>props.onActionClick(props._id, UserConstants.Edit)}>
             <svg
               aria-hidden="true"
               focusable="false"
@@ -42,7 +41,7 @@ export const UserTableBody = (props) => {
               ></path>
             </svg>
           </button>
-          <button className="btn delete-btn" title="Delete">
+          <button className="btn delete-btn" title="Delete" onClick={()=>props.onActionClick(props._id, UserConstants.Delete)}>
             <svg
               aria-hidden="true"
               focusable="false"
@@ -59,7 +58,7 @@ export const UserTableBody = (props) => {
               ></path>
             </svg>
           </button>
-          <button className="btn info-btn" title="Info" onClick={()=>props.onDetailsClick(props_id)}>
+          <button className="btn info-btn" title="Info" onClick={()=>props.onActionClick(props._id, UserConstants.Details)}>
             <svg
               aria-hidden="true"
               focusable="false"
