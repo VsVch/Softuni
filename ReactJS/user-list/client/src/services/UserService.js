@@ -32,5 +32,24 @@ export const create = async (data) => {
     });
 
     const result = await response.json();    
+    return result.user;
+}
+
+export const deleteOne = async (userId) => {
+    const response = await fetch(`${baseUrl}/${userId}`, {
+        method : 'DELETE'
+    })
+    const result = await response.json();
     return result;
+}
+
+export const editOne = async (userId, data) => {
+    const response = await fetch(`${baseUrl}/${userId}`, {
+        method : 'PUT',
+        body: JSON.stringify(data)
+    })
+    const result = await response.json();
+    return result;
+    
+    
 }
