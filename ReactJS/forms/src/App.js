@@ -1,5 +1,5 @@
 import "./App.css";
-import {useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 
 function App() {
   // const [username, setUsername] = useState('');
@@ -9,7 +9,7 @@ function App() {
   // const [userType, setUserType] = useState('individual');
   // const [gender, setGender] = useState('');
   // const [tac, setTac] = useState(false);
-
+  const infoRef = useRef();
   const [values, setValues] = useState({
     username: '',
     age: '',
@@ -28,6 +28,12 @@ const submitHandler = (e) => {
   // let values = Object.fromEntries(new FormData(e.target));
   
 };
+
+useEffect(()=>{
+  if (values.username && values.age) {
+    infoRef.current.value = `${values.username} - ${values.age}`;
+  }
+}, [values.username, values.age])
 
 const changeHandler = (e) => {
   console.log(e.target);
@@ -89,6 +95,10 @@ const changeHandler = (e) => {
             <input type="submit" value="Register" disabled={!values.tac}/>
             {/* <button type="submit">Login</button> */}
           </div>
+          <div>
+            <label htmlFor="uncontrolled-input">Uncontrolled Input:</label>
+            <textarea name="uncontrolled" id="uncontrolled-input" ref={infoRef}/>
+          </div>          
         </form>
       </header>
     </div>
