@@ -15,56 +15,45 @@ export const UserSection = () => {
   const [users, setUsers] = useState([]);  
 
   useEffect(() => {
+    
     UserService.getAll().then((result) => setUsers(result));
+    
   }, []);
-
-  const userActionClickHandler = (userId, actionType) => {    
+  
+  const userActionClickHandler = (userId, actionType) => {   
+    
+    if (actionType === UserConstants.Add) {
+      setUserAction({  
+        userId : userId,      
+        action: actionType,
+      });
+    }else{
       UserService.getOne(userId).then((user) => {
         setUserAction({
           user,
           action: actionType,
         });
       });
+    }      
   };  
 
   const closeHandler = () => {
     setUserAction({ user: null, actionType: null });
   };
 
-  const userCreateClickHandler = (e) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.target);
-    const {
-      firstName,
-      lastName,
-      email,
-      imageUrl,
-      phoneNumber,
-      ...address
-    } = Object.fromEntries(formData);
-
-    const userData = {
-      firstName,
-      lastName,
-      email,
-      imageUrl,
-      phoneNumber,
-      address,
-    };
-
+  const userCreateClickHandler = (userData) => {
     UserService.create(userData)
     .then((user) => {
-      const newUser = UserService.getAll().then((result) => setUsers(result));
-      setUsers(newUser => [...newUser])
+      setUsers(oldValue => [...oldValue, user])
       closeHandler();
+    })
+    .catch(err => {
+      
     });
   };
 
-  const userEditClickHandler =(e)=> {
-    e.preventDefault();
-
-  console.log(e.target); 
+  const userEditClickHandler = (e)=> {
+    e.preventDefault();   
 
     const formData = new FormData(e.target);
     const {
@@ -96,41 +85,33 @@ export const UserSection = () => {
 
   const userDeleteClickHandler = (userId) => {
     UserService.deleteOne(userId)      
-    .then((userId) => {
-      UserService.getAll().then((result) => setUsers(result));
+    .then((userId) => {      
+      setUsers(oldValue => [...oldValue].filter(user => user._id != userId))
       closeHandler();      
     });
-  }
+  }  
 
   return (
     <>
       <div className="table-wrapper">
-        {userAction.action == UserConstants.Details && (
-          <UserDetails
-            {...userAction.user}
+        {userAction.action == UserConstants.Details && (<UserDetails {...userAction.user}
             onCloseHandler={closeHandler}
             onActionClick={userActionClickHandler}
           />
         )}
-        {userAction.action == UserConstants.Edit && (
-          <UserEdit
-            {...userAction.user}
+        {userAction.action == UserConstants.Edit && (<UserEdit  {...userAction.user}
             onCloseHandler={closeHandler}
             onActionClick={userActionClickHandler}
             onEditHendler={userEditClickHandler}
           />
         )}
-        {userAction.action == UserConstants.Delete && (
-          <UserDelete
-            {...userAction.user}
+        {userAction.action == UserConstants.Delete && (<UserDelete {...userAction.user}
             onCloseHandler={closeHandler}
             onActionClick={userActionClickHandler}
             onDeleteHendler={userDeleteClickHandler}
           />
         )}
-        {userAction.action == UserConstants.Add && (
-          <UserAdd
-            onCloseHandler={closeHandler}
+        {userAction.action == UserConstants.Add && ( <UserAdd onCloseHandler={closeHandler}
             onUserCreate={userCreateClickHandler}
           />
         )}
@@ -140,10 +121,7 @@ export const UserSection = () => {
             <UserTableHead />
           </thead>
           <tbody>
-            {users.map((user) => (
-              <UserTableBody
-                key={user._id}
-                {...user}
+            {users.map((user) => (<UserTableBody key={user._id} {...user}
                 onActionClick={userActionClickHandler}
               />
             ))}
@@ -152,8 +130,7 @@ export const UserSection = () => {
       </div>
       <button
         className="btn-add btn"
-        onClick={() => userActionClickHandler(null, UserConstants.Add)}
-      >
+        onClick={() => userActionClickHandler(null, UserConstants.Add)}>
         Add new user
       </button>
     </>

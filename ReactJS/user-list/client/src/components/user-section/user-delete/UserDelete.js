@@ -19,7 +19,7 @@ export const UserDelete = (props) => {
           </header>
           <div className="actions">
             <div id="form-actions">
-              <button id="action-save" className="btn" type="submit" onClick={()=>props.onDeleteHendler()}>Delete</button>
+              <button id="action-save" className="btn" type="submit" onClick={()=>props.onDeleteHendler(props._id)}>Delete</button>
               <button id="action-cancel" className="btn" type="button" onClick={()=>props.onCloseHandler()}>
                 Cancel
               </button>

@@ -4,8 +4,8 @@ import { UserConstants } from '../UserConstants.js'
 
 export const UserTableBody = (props) => {
    
-  const blankImageUrl = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png';
- 
+  const blankImageUrl = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png';  
+
   return (
     
       <tr>
@@ -20,7 +20,7 @@ export const UserTableBody = (props) => {
         <td>{props.firstName}</td>
         <td>{props.lastName}</td>
         <td>{props.email}</td>
-        <td>{props.phoneNumber}</td>
+        <td>{props.phoneNumber}</td>        
         <td>{UserSectionHelperService.formatData(props.createdAt)}</td>        
 
         <td className="actions">

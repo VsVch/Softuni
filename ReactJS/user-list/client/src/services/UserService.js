@@ -31,8 +31,12 @@ export const create = async (data) => {
         body: JSON.stringify(data)
     });
 
-    const result = await response.json();    
-    return result.user;
+    if (response.ok) {
+        const result = await response.json();    
+        return result.createdUser;
+    }else {
+        throw{message: 'Unable to create user'}
+    }       
 }
 
 export const deleteOne = async (userId) => {
@@ -40,16 +44,13 @@ export const deleteOne = async (userId) => {
         method : 'DELETE'
     })
     const result = await response.json();
-    return result;
+    
+    return result.userId;
 }
 
 export const editOne = async (userId, data) => {
     const response = await fetch(`${baseUrl}/${userId}`, {
         method : 'PUT',
         body: JSON.stringify(data)
-    })
-    const result = await response.json();
-    return result;
-    
-    
+    })    
 }
