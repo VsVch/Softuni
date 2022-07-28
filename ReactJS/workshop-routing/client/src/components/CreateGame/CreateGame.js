@@ -1,11 +1,22 @@
-const CreateGame = ({addGameHandler}) => {
+import * as gameService from '../../services/gameService.js';
+import { useContext } from 'react';
+
+import { GameContext } from '../../contexts/GameContext.js';
+
+const CreateGame = () => {
+  const {gameAdd} = useContext(GameContext);
+  
   const onSubmit = (e) => {
     e.preventDefault()
-
-    const gameData = Object.fromEntries(new FormData(e.target));    
-    addGameHandler(gameData);
     
-   }
+    const gameData = Object.fromEntries(new FormData(e.target));    
+
+    gameService.create(gameData)
+      .then(result => {
+        gameAdd(result); 
+      });
+   };
+
   return (
     <section id="create-page" className="auth">
       <form id="create" onSubmit={onSubmit}>

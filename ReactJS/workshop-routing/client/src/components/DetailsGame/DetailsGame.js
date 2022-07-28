@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const DetailsGame = ({ games, addComment }) => {
   const { gameId } = useParams();
@@ -68,9 +68,9 @@ const DetailsGame = ({ games, addComment }) => {
         </div>
         {/* Edit/Delete buttons ( Only for creator of this game )  */}
         <div className="buttons">
-          <a href="#" className="button">
+          <Link to={`/games/${gameId}/edit`} className="button">
             Edit
-          </a>
+          </Link>
           <a href="#" className="button">
             Delete
           </a>
